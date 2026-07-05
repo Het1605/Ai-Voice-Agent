@@ -21,9 +21,10 @@ class Settings(BaseSettings):
     API_V1_STR: str = "/api/v1"
 
     # Security Settings
-    SECRET_KEY: str = "dev_secret_key_change_me_in_production"
-    ACCESS_TOKEN_EXPIRE_MINUTES: int = 11520  # 8 days
-    ALGORITHM: str = "HS256"
+    JWT_SECRET_KEY: str = "dev_secret_key_change_me_in_production"
+    JWT_ALGORITHM: str = "HS256"
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
+    REFRESH_TOKEN_EXPIRE_MINUTES: int = 10080  # 7 days
 
     # CORS Settings
     CORS_ORIGINS: List[str] = ["*"]
