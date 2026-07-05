@@ -10,6 +10,7 @@ Architecture Fit:
 
 from datetime import datetime, timezone
 import uuid
+import enum
 from typing import Optional
 
 from sqlalchemy import String, Boolean, DateTime, Integer
@@ -17,6 +18,12 @@ from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy.dialects.postgresql import UUID
 
 from backend.app.core.database import Base
+
+
+class SystemRole(str, enum.Enum):
+    SUPER_ADMIN = "super_admin"
+    ADMIN = "admin"
+    USER = "user"
 
 
 def utc_now() -> datetime:
@@ -41,6 +48,7 @@ class User(Base):
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)
     is_superuser: Mapped[bool] = mapped_column(Boolean, default=False)
     is_verified: Mapped[bool] = mapped_column(Boolean, default=False)
+    role: Mapped[str] = mapped_column(String, default=SystemRole.USER.value)
 
     # Security and login tracking
     last_login_at: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True)

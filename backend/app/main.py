@@ -80,6 +80,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+from backend.app.api.v1.api import api_router
+app.include_router(api_router, prefix=settings.API_V1_STR)
+
 @app.exception_handler(BaseAppException)
 async def application_exception_handler(request: Request, exc: BaseAppException) -> JSONResponse:
     """

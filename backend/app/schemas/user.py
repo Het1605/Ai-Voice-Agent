@@ -49,6 +49,7 @@ class UserResponse(UserBase):
     id: UUID
     is_superuser: bool
     is_verified: bool
+    role: str
     last_login_at: Optional[datetime] = None
     created_at: datetime
     updated_at: datetime
