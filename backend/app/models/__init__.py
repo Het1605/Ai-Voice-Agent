@@ -5,4 +5,6 @@ Responsibilities:
   - Ensures models are registered with SQLAlchemy's Base.metadata for Alembic autogeneration.
 """
 
-from backend.app.models.user import User
+from backend.app.models.user import User, SystemRole
+from backend.app.models.organization import Organization
+from backend.app.models.organization_member import OrganizationMember

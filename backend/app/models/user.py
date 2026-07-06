@@ -14,7 +14,7 @@ import enum
 from typing import Optional
 
 from sqlalchemy import String, Boolean, DateTime, Integer
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.dialects.postgresql import UUID
 
 from backend.app.core.database import Base
@@ -52,8 +52,16 @@ class User(Base):
 
     # Security and login tracking
     last_login_at: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True)
-    failed_login_attempts: Mapped[int] = mapped_column(Integer, default=0)
+    failed_login_attempts: Mapped[int] = mapped_column(Integer, default=0, nullable=False)
     account_locked_until: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True)
+
+    # Relationships
+    organizations: Mapped[list["OrganizationMember"]] = relationship(
+        "OrganizationMember", 
+        back_populates="user", 
+        cascade="all, delete-orphan",
+        lazy="selectin"
+    )
 
     # Audit timestamps
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utc_now)
