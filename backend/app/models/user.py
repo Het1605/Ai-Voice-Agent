@@ -62,6 +62,11 @@ class User(Base):
         cascade="all, delete-orphan",
         lazy="selectin"
     )
+    created_agents: Mapped[list["Agent"]] = relationship(
+        "Agent",
+        back_populates="creator",
+        lazy="selectin"
+    )
 
     # Audit timestamps
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utc_now)

@@ -124,45 +124,58 @@ export default function OrganizationDetails() {
         </div>
       </div>
 
-      <div className="bg-white p-6 border rounded shadow-sm">
-        <h2 className="text-xl font-semibold mb-4">Members ({members.length})</h2>
-        
-        {members.length === 0 ? (
-          <div className="p-4 bg-gray-50 text-center text-gray-500 rounded">
-            No members found.
-          </div>
-        ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse">
-              <thead>
-                <tr className="border-b">
-                  <th className="py-3 px-4 font-medium text-gray-600">User ID</th>
-                  <th className="py-3 px-4 font-medium text-gray-600">Role</th>
-                  <th className="py-3 px-4 font-medium text-gray-600">Joined</th>
-                </tr>
-              </thead>
-              <tbody>
-                {members.map((member) => (
-                  <tr key={member.id} className="border-b last:border-0 hover:bg-gray-50">
-                    <td className="py-3 px-4 font-mono text-sm text-gray-600">{member.user_id}</td>
-                    <td className="py-3 px-4">
-                      <span className={`px-2 py-1 text-xs rounded-full font-medium ${
-                        member.role === 'owner' ? 'bg-purple-100 text-purple-800' :
-                        member.role === 'admin' ? 'bg-blue-100 text-blue-800' :
-                        'bg-gray-100 text-gray-800'
-                      }`}>
-                        {member.role.toUpperCase()}
-                      </span>
-                    </td>
-                    <td className="py-3 px-4 text-sm text-gray-500">
-                      {new Date(member.joined_at).toLocaleDateString()}
-                    </td>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="bg-white p-6 border rounded shadow-sm">
+          <h2 className="text-xl font-semibold mb-4">Members ({members.length})</h2>
+          
+          {members.length === 0 ? (
+            <div className="p-4 bg-gray-50 text-center text-gray-500 rounded">
+              No members found.
+            </div>
+          ) : (
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="border-b">
+                    <th className="py-3 px-4 font-medium text-gray-600">User ID</th>
+                    <th className="py-3 px-4 font-medium text-gray-600">Role</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {members.map((member) => (
+                    <tr key={member.id} className="border-b last:border-0 hover:bg-gray-50">
+                      <td className="py-3 px-4 font-mono text-sm text-gray-600">{member.user_id.substring(0, 8)}...</td>
+                      <td className="py-3 px-4">
+                        <span className={`px-2 py-1 text-xs rounded-full font-medium ${
+                          member.role === 'owner' ? 'bg-purple-100 text-purple-800' :
+                          member.role === 'admin' ? 'bg-blue-100 text-blue-800' :
+                          'bg-gray-100 text-gray-800'
+                        }`}>
+                          {member.role.toUpperCase()}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </div>
+
+        <div className="bg-white p-6 border rounded shadow-sm flex flex-col justify-between">
+          <div>
+            <h2 className="text-xl font-semibold mb-4">AI Agents</h2>
+            <p className="text-gray-600 mb-6">
+              Configure and manage AI voice agents for this organization.
+            </p>
           </div>
-        )}
+          <Link 
+            href={`/organizations/${org.id}/agents`}
+            className="block text-center bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+          >
+            Manage Agents &rarr;
+          </Link>
+        </div>
       </div>
     </div>
   );

@@ -22,7 +22,13 @@ class Organization(Base):
     
     # Relationships
     members: Mapped[list["OrganizationMember"]] = relationship(
-        "OrganizationMember", 
+        "OrganizationMember",
+        back_populates="organization", 
+        cascade="all, delete-orphan",
+        lazy="selectin"
+    )
+    agents: Mapped[list["Agent"]] = relationship(
+        "Agent", 
         back_populates="organization", 
         cascade="all, delete-orphan",
         lazy="selectin"

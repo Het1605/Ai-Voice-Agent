@@ -8,3 +8,4 @@ Responsibilities:
 from backend.app.models.user import User, SystemRole
 from backend.app.models.organization import Organization
 from backend.app.models.organization_member import OrganizationMember
+from backend.app.models.agent import Agent
