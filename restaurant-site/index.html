@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Saffron &mdash; Modern Mediterranean Fine Dining</title>
+  <meta name="description" content="Saffron - An exquisite Mediterranean dining experience in the heart of the city. Reservations available." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ========== NAVIGATION ========== -->
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="#" class="logo">
+        <span class="logo-icon"><i class="fas fa-utensils"></i></span>
+        <span class="logo-text">Saffron</span>
+      </a>
+      <div class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#hero" class="nav-link active">Home</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#menu" class="nav-link">Menu</a></li>
+        <li><a href="#gallery" class="nav-link">Gallery</a></li>
+        <li><a href="#testimonials" class="nav-link">Reviews</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+        <li><a href="#reservation" class="nav-link btn-nav-reserve">Reserve a Table</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ========== HERO SECTION ========== -->
+  <section class="hero" id="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-bg"></div>
+    <div class="container hero-content">
+      <div class="hero-badge">Est. 2018</div>
+      <h1 class="hero-title">Saffron</h1>
+      <p class="hero-subtitle">Modern Mediterranean Fine Dining</p>
+      <p class="hero-desc">An intimate culinary journey through the sun-drenched shores of the Mediterranean, crafted with passion and the finest seasonal ingredients.</p>
+      <div class="hero-actions">
+        <a href="#reservation" class="btn btn-primary">Reserve a Table</a>
+        <a href="#menu" class="btn btn-outline">Explore Menu</a>
+      </div>
+      <div class="hero-indicator">
+        <span>Scroll to discover</span>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== ABOUT SECTION ========== -->
+  <section class="about section" id="about">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Our Story</span>
+        <h2 class="section-title">Where Tradition Meets <span class="accent">Innovation</span></h2>
+        <div class="section-divider"><i class="fas fa-leaf"></i></div>
+      </div>
+      <div class="about-grid">
+        <div class="about-image">
+          <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80" alt="Elegant restaurant interior with warm lighting" loading="lazy" />
+          <div class="about-exp">
+            <span class="about-exp-num">15+</span>
+            <span class="about-exp-label">Years of Culinary Excellence</span>
+          </div>
+        </div>
+        <div class="about-content">
+          <h3>A Culinary Destination</h3>
+          <p>Nestled in the heart of the city, Saffron brings the vibrant flavors of the Mediterranean to your plate. Our philosophy is simple: honor tradition while embracing innovation, using only the freshest locally-sourced ingredients.</p>
+          <p>Every dish tells a story &mdash; from the sun-ripened tomatoes of Sicily to the fragrant herbs of the Greek countryside. Our award-winning chefs transform these timeless ingredients into contemporary masterpieces.</p>
+          <div class="about-stats">
+            <div class="stat">
+              <span class="stat-num" data-count="3">0</span>
+              <span class="stat-label">Michelin Stars</span>
+            </div>
+            <div class="stat">
+              <span class="stat-num" data-count="50">0</span>
+              <span class="stat-label">Artisan Dishes</span>
+            </div>
+            <div class="stat">
+              <span class="stat-num" data-count="15">0</span>
+              <span class="stat-label">Years of Passion</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== MENU SECTION ========== -->
+  <section class="menu section" id="menu">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Our Menu</span>
+        <h2 class="section-title">A Symphony of <span class="accent">Flavors</span></h2>
+        <div class="section-divider"><i class="fas fa-utensils"></i></div>
+      </div>
+
+      <!-- Menu Categories -->
+      <div class="menu-tabs">
+        <button class="menu-tab active" data-category="all">All</button>
+        <button class="menu-tab" data-category="starters">Starters</button>
+        <button class="menu-tab" data-category="mains">Main Course</button>
+        <button class="menu-tab" data-category="desserts">Desserts</button>
+        <button class="menu-tab" data-category="wine">Wine &amp; Cocktails</button>
+      </div>
+
+      <div class="menu-grid">
+        <!-- Starter 1 -->
+        <div class="menu-item" data-category="starters">
+          <div class="menu-item-img">
+            <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&q=80" alt="Bruschetta with tomatoes and basil" loading="lazy" />
+          </div>
+          <div class="menu-item-body">
+            <div class="menu-item-header">
+              <h4>Bruschetta al Pomodoro</h4>
+              <span class="menu-item-price">$14</span>
+            </div>
+            <p>Toasted sourdough, vine-ripened tomatoes, fresh basil, extra virgin olive oil, balsamic reduction</p>
+          </div>
+        </div>
+
+        <!-- Starter 2 -->
+        <div class="menu-item" data-category="starters">
+          <div class="menu-item-img">
+            <img src="https://images.unsplash.com/photo-1604909052743-94e838986d24?w=400&q=80" alt="Calamari with lemon aioli" loading="lazy" />
+          </div>
+          <div class="menu-item-body">
+            <div class="menu-item-header">
+              <h4>Calamari Fritti</h4>
+              <span class="menu-item-price">$16</span>
+            </div>
+            <p>Crispy baby squid, lemon aioli, smoked paprika, micro herbs, preserved lemon</p>
+          </div>
+        </div>
+
+        <!-- Starter 3 -->
+        <div class="menu-item" data-category="starters">
+          <div class="menu-item-img">
+            <img src="https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?w=400&q=80" alt="Roasted beetroot and goat cheese salad" loading="lazy" />
+          </div>
+          <div class="menu-item-body">
+            <div class="menu-item-header">
+              <h4>Beetroot &amp; Burrata</h4>
+              <span class="menu-item-price">$18</span>
+            </div>
+            <p>Roasted candy beetroot, creamy burrata, pistachio crumb, aged balsamic, wild rocket</p>
+          </div>
+        </div>
+
+        <!-- Main 1 -->
+        <div class="menu-item" data-category="mains">
+          <div class="menu-item-img">
+            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=400&q=80" alt="Grilled lamb rack with herbs" loading="lazy" />
+          </div>
+          <div class="menu-item-body">
+            <div class="menu-item-header">
+              <h4>Herb-Crusted Lamb Rack</h4>
+              <span class="menu-item-price">$38</span>
+            </div>
+            <p>New Zealand lamb, rosemary &amp; garlic crust, truffle mash, seasonal vegetables, red wine jus</p>
+          </div>
+        </div>
+
+        <!-- Main 2 -->
+        <div class="menu-item" data-category="mains">
+          <div class="menu-item-img">
+            <img src="https://images.unsplash.com/photo-1574482620811-04b7e5e5df11?w=400&q=80" alt="Pan-seared Atlantic salmon" loading="lazy" />
+          </div>
+          <div class="menu-item-body">
+            <div class="menu-item-header">
+              <h4>Pan-Seared Atlantic Salmon</h4>
+              <span class="menu-item-price">$32</span>
+            </div>
+            <p>Crispy skin salmon, saffron risotto, asparagus, dill cr&egrave;me fra&icirc;che, lemon gel</p>
+          </div>
+        </div>
+
+        <!-- Main 3 -->
+        <div class="menu-item" data-category="mains">
+          <div class="menu-item-img">
+            <img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=400&q=80" alt="Wild mushroom and truffle risotto" loading="lazy" />
+          </div>
+          <div class="menu-item-body">
+            <div class="menu-item-header">
+              <h4>Truffle Mushroom Risotto</h4>
+              <span class="menu-item-price">$26</span>
+            </div>
+            <p>Carnaroli rice, wild mushrooms, black truffle, aged parmesan, truffle oil, chives</p>
+          </div>
+        </div>
+
+        <!-- Dessert 1 -->
+        <div class="menu-item" data-category="desserts">
+          <div class="menu-item-img">
+            <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=400&q=80" alt="Tiramisu with chocolate shavings" loading="lazy" />
+          </div>
+          <div class="menu-item-body">
+            <div class="menu-item-header">
+              <h4>Classic Tiramisu</h4>
+              <span class="menu-item-price">$14</span>
+            </div>
+            <p>Espresso-soaked ladyfingers, mascarpone cream, Valrhona cocoa, dark chocolate shavings</p>
+          </div>
+        </div>
+
+        <!-- Dessert 2 -->
+        <div class="menu-item" data-category="desserts">
+          <div class="menu-item-img">
+            <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400&q=80" alt="Panna cotta with berries" loading="lazy" />
+          </div>
+          <div class="menu-item-body">
+            <div class="menu-item-header">
+              <h4>Vanilla Panna Cotta</h4>
+              <span class="menu-item-price">$13</span>
+            </div>
+            <p>Madagascar vanilla, mixed berry compote, mint gel, crushed amaretti biscuits</p>
+          </div>
+        </div>
+
+        <!-- Dessert 3 -->
+        <div class="menu-item" data-category="desserts">
+          <div class="menu-item-img">
+            <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400&q=80" alt="Chocolate fondant with ice cream" loading="lazy" />
+          </div>
+          <div class="menu-item-body">
+            <div class="menu-item-header">
+              <h4>Dark Chocolate Fondant</h4>
+              <span class="menu-item-price">$16</span>
+            </div>
+            <p>Warm Valrhona chocolate fondant, vanilla bean ice cream, salted caramel, gold leaf</p>
+          </div>
+        </div>
+
+        <!-- Wine 1 -->
+        <div class="menu-item" data-category="wine">
+          <div class="menu-item-img">
+            <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=400&q=80" alt="Glass of red wine" loading="lazy" />
+          </div>
+          <div class="menu-item-body">
+            <div class="menu-item-header">
+              <h4>Barolo Riserva 2016</h4>
+              <span class="menu-item-price">$22</span>
+            </div>
+            <p>Piedmont, Italy &mdash; Nebbiolo, full-bodied with notes of dark cherry, truffle, and rose</p>
+          </div>
+        </div>
+
+        <!-- Wine 2 -->
+        <div class="menu-item" data-category="wine">
+          <div class="menu-item-img">
+            <img src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400&q=80" alt="Signature cocktail with herbs" loading="lazy" />
+          </div>
+          <div class="menu-item-body">
+            <div class="menu-item-header">
+              <h4>Saffron Signature Spritz</h4>
+              <span class="menu-item-price">$18</span>
+            </div>
+            <p>Empire gin, Aperol, saffron infusion, prosecco, fresh rosemary, edible flowers</p>
+          </div>
+        </div>
+
+        <!-- Wine 3 -->
+        <div class="menu-item" data-category="wine">
+          <div class="menu-item-img">
+            <img src="https://images.unsplash.com/photo-1569529465841-dfecdab7503b?w=400&q=80" alt="Sauvignon Blanc wine" loading="lazy" />
+          </div>
+          <div class="menu-item-body">
+            <div class="menu-item-header">
+              <h4>Sancerre Blanc 2023</h4>
+              <span class="menu-item-price">$16</span>
+            </div>
+            <p>Loire Valley, France &mdash; Sauvignon Blanc, crisp citrus, flinty minerality, green apple</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== GALLERY SECTION ========== -->
+  <section class="gallery section" id="gallery">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Gallery</span>
+        <h2 class="section-title">A Visual <span class="accent">Journey</span></h2>
+        <div class="section-divider"><i class="fas fa-camera"></i></div>
+      </div>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item" data-index="0">
+        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&q=80" alt="Elegant restaurant interior" loading="lazy" />
+        <div class="gallery-overlay"><span>View</span></div>
+      </div>
+      <div class="gallery-item" data-index="1">
+        <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=600&q=80" alt="Beautifully plated dish" loading="lazy" />
+        <div class="gallery-overlay"><span>View</span></div>
+      </div>
+      <div class="gallery-item" data-index="2">
+        <img src="https://images.unsplash.com/photo-1550966871-3ed3cdb51f3a?w=600&q=80" alt="Bar area with ambient lighting" loading="lazy" />
+        <div class="gallery-overlay"><span>View</span></div>
+      </div>
+      <div class="gallery-item" data-index="3">
+        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80" alt="Gourmet steak with vegetables" loading="lazy" />
+        <div class="gallery-overlay"><span>View</span></div>
+      </div>
+      <div class="gallery-item" data-index="4">
+        <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&q=80" alt="Outdoor terrace dining" loading="lazy" />
+        <div class="gallery-overlay"><span>View</span></div>
+      </div>
+      <div class="gallery-item" data-index="5">
+        <img src="https://images.unsplash.com/photo-1476124369491-e7addf5db371?w=600&q=80" alt="Artfully arranged dessert" loading="lazy" />
+        <div class="gallery-overlay"><span>View</span></div>
+      </div>
+      <div class="gallery-item" data-index="6">
+        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80" alt="Table set for fine dining" loading="lazy" />
+        <div class="gallery-overlay"><span>View</span></div>
+      </div>
+      <div class="gallery-item" data-index="7">
+        <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=600&q=80" alt="Fresh salad ingredients" loading="lazy" />
+        <div class="gallery-overlay"><span>View</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
+    <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
+    <img src="" alt="Gallery image" class="lightbox-img" id="lightboxImg" />
+    <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next"><i class="fas fa-chevron-right"></i></button>
+  </div>
+
+  <!-- ========== TESTIMONIALS SECTION ========== -->
+  <section class="testimonials section" id="testimonials">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Testimonials</span>
+        <h2 class="section-title">What Our Guests <span class="accent">Say</span></h2>
+        <div class="section-divider"><i class="fas fa-star"></i></div>
+      </div>
+      <div class="testimonials-slider">
+        <div class="testimonial-card active">
+          <div class="testimonial-stars">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+          </div>
+          <p class="testimonial-text">"An extraordinary dining experience. The tasting menu was a masterpiece &mdash; each course more surprising and delightful than the last. The wine pairing was impeccable."</p>
+          <div class="testimonial-author">
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80" alt="Sarah Mitchell" />
+            <div>
+              <strong>Sarah Mitchell</strong>
+              <span>Food Critic, The Gourmet Times</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-stars">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+          </div>
+          <p class="testimonial-text">"The ambiance is unmatched &mdash; warm, intimate, and sophisticated. The lamb rack was cooked to perfection, and the service was world-class. We'll be coming back monthly."</p>
+          <div class="testimonial-author">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80" alt="James Chen" />
+            <div>
+              <strong>James &amp; Lisa Chen</strong>
+              <span>Regular Patrons</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-stars">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+          </div>
+          <p class="testimonial-text">"We hosted our anniversary dinner at Saffron and it was absolutely perfect. The private dining room, the customized menu, the attention to detail &mdash; everything was flawless."</p>
+          <div class="testimonial-author">
+            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80" alt="Maria Rodriguez" />
+            <div>
+              <strong>Maria Rodriguez</strong>
+              <span>Event Host</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-dots">
+        <button class="dot active" data-index="0" aria-label="Testimonial 1"></button>
+        <button class="dot" data-index="1" aria-label="Testimonial 2"></button>
+        <button class="dot" data-index="2" aria-label="Testimonial 3"></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CHEF SECTION ========== -->
+  <section class="chef section">
+    <div class="container">
+      <div class="chef-grid">
+        <div class="chef-image">
+          <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=600&q=80" alt="Executive Chef Marco Bianchi in the kitchen" loading="lazy" />
+        </div>
+        <div class="chef-content">
+          <span class="section-tag">Meet Our Chef</span>
+          <h2 class="chef-name">Marco <span class="accent">Bianchi</span></h2>
+          <p class="chef-title">Executive Chef &amp; Founder</p>
+          <p class="chef-bio">Born in Bologna and trained in the finest kitchens of Paris and Barcelona, Chef Marco brings two decades of culinary mastery to Saffron. His philosophy celebrates the purity of Mediterranean ingredients while pushing the boundaries of contemporary technique.</p>
+          <div class="chef-credentials">
+            <div class="credential">
+              <i class="fas fa-award"></i>
+              <span>3x Michelin Starred</span>
+            </div>
+            <div class="credential">
+              <i class="fas fa-book-open"></i>
+              <span>Author, "Mediterranean Soul"</span>
+            </div>
+            <div class="credential">
+              <i class="fas fa-globe"></i>
+              <span>James Beard Award Nominee</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== RESERVATION SECTION ========== -->
+  <section class="reservation section" id="reservation">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Reservations</span>
+        <h2 class="section-title">Book Your <span class="accent">Experience</span></h2>
+        <div class="section-divider"><i class="fas fa-calendar-check"></i></div>
+      </div>
+      <div class="reservation-grid">
+        <div class="reservation-info">
+          <div class="info-card">
+            <i class="fas fa-phone"></i>
+            <h4>Call Us</h4>
+            <p><a href="tel:+12125551234">(212) 555-1234</a></p>
+          </div>
+          <div class="info-card">
+            <i class="fas fa-clock"></i>
+            <h4>Opening Hours</h4>
+            <p>Mon&ndash;Thu: 5:30 PM &ndash; 10:00 PM</p>
+            <p>Fri&ndash;Sat: 5:30 PM &ndash; 11:00 PM</p>
+            <p>Sunday: 11:00 AM &ndash; 9:00 PM</p>
+          </div>
+          <div class="info-card">
+            <i class="fas fa-location-dot"></i>
+            <h4>Location</h4>
+            <p>128 Bedford Avenue</p>
+            <p>Brooklyn, NY 11249</p>
+          </div>
+        </div>
+        <form class="reservation-form" id="reservationForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="resName">Full Name</label>
+              <input type="text" id="resName" placeholder="Your name" required />
+            </div>
+            <div class="form-group">
+              <label for="resEmail">Email Address</label>
+              <input type="email" id="resEmail" placeholder="your@email.com" required />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="resDate">Date</label>
+              <input type="date" id="resDate" required />
+            </div>
+            <div class="form-group">
+              <label for="resTime">Time</label>
+              <select id="resTime" required>
+                <option value="">Select time</option>
+                <option value="17:30">5:30 PM</option>
+                <option value="18:00">6:00 PM</option>
+                <option value="18:30">6:30 PM</option>
+                <option value="19:00">7:00 PM</option>
+                <option value="19:30">7:30 PM</option>
+                <option value="20:00">8:00 PM</option>
+                <option value="20:30">8:30 PM</option>
+                <option value="21:00">9:00 PM</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="resGuests">Number of Guests</label>
+              <select id="resGuests" required>
+                <option value="">Select</option>
+                <option value="1">1 Guest</option>
+                <option value="2">2 Guests</option>
+                <option value="3">3 Guests</option>
+                <option value="4">4 Guests</option>
+                <option value="5">5 Guests</option>
+                <option value="6">6 Guests</option>
+                <option value="8">8+ Guests (Private Dining)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="resOccasion">Occasion (Optional)</label>
+              <select id="resOccasion">
+                <option value="">Select</option>
+                <option value="birthday">Birthday</option>
+                <option value="anniversary">Anniversary</option>
+                <option value="business">Business Dinner</option>
+                <option value="date">Date Night</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="resNotes">Special Requests</label>
+            <textarea id="resNotes" rows="3" placeholder="Allergies, dietary preferences, seating preferences..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full" id="resSubmitBtn">
+            <span>Confirm Reservation</span>
+            <i class="fas fa-arrow-right"></i>
+          </button>
+          <div class="form-success" id="formSuccess">
+            <i class="fas fa-check-circle"></i>
+            <span>Thank you! Your reservation request has been received. We'll confirm within 2 hours.</span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CONTACT / MAP SECTION ========== -->
+  <section class="contact section" id="contact">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Contact</span>
+        <h2 class="section-title">Get in <span class="accent">Touch</span></h2>
+        <div class="section-divider"><i class="fas fa-envelope"></i></div>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-map">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3024.2219901290357!2d-73.961694!3d40.720128!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25986c0b0b0b1%3A0x4c6e3a2c3c1a5c3f!2s128%20Bedford%20Ave%2C%20Brooklyn%2C%20NY%2011249!5e0!3m2!1sen!2sus!4v1" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Saffron Restaurant Location"></iframe>
+        </div>
+        <div class="contact-details">
+          <div class="contact-item">
+            <i class="fas fa-map-pin"></i>
+            <div>
+              <h4>Address</h4>
+              <p>128 Bedford Avenue, Brooklyn, NY 11249</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-phone-alt"></i>
+            <div>
+              <h4>Phone</h4>
+              <p><a href="tel:+12125551234">(212) 555-1234</a></p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <div>
+              <h4>Email</h4>
+              <p><a href="mailto:reservations@saffronnyc.com">reservations@saffronnyc.com</a></p>
+            </div>
+          </div>
+          <div class="contact-social">
+            <h4>Follow Us</h4>
+            <div class="social-links">
+              <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+              <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+              <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+              <a href="#" aria-label="Yelp"><i class="fab fa-yelp"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="logo">
+            <span class="logo-icon"><i class="fas fa-utensils"></i></span>
+            <span class="logo-text">Saffron</span>
+          </a>
+          <p>Modern Mediterranean fine dining in the heart of Brooklyn. Crafted with passion, served with love.</p>
+          <div class="footer-newsletter">
+            <p>Subscribe to our newsletter for exclusive events and seasonal menus.</p>
+            <form class="newsletter-form" id="newsletterForm">
+              <input type="email" placeholder="Your email address" required />
+              <button type="submit" aria-label="Subscribe"><i class="fas fa-arrow-right"></i></button>
+            </form>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#menu">Our Menu</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#reservation">Reservations</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Hours</h4>
+          <ul class="footer-hours">
+            <li><span>Monday&ndash;Thursday</span><span>5:30 PM &ndash; 10 PM</span></li>
+            <li><span>Friday&ndash;Saturday</span><span>5:30 PM &ndash; 11 PM</span></li>
+            <li><span>Sunday</span><span>11 AM &ndash; 9 PM</span></li>
+            <li><span>Happy Hour</span><span>Mon&ndash;Fri 5&ndash;7 PM</span></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>More</h4>
+          <ul>
+            <li><a href="#">Private Events</a></li>
+            <li><a href="#">Gift Cards</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Press</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Saffron Restaurant. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Accessibility</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <script src="script.js"></script>
+</body>
+</html>
