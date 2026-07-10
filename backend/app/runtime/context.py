@@ -18,6 +18,9 @@ class RuntimeContext(BaseModel):
     # Internal Metadata & Temporary Execution Data
     metadata: Dict[str, Any] = Field(default_factory=dict)
     
+    # Conversation History
+    history: list[Dict[str, str]] = Field(default_factory=list)
+    
     # Future Module Attachments (Placeholders for dependency injection)
     # These will be populated as those components are implemented, without
     # needing to change this core structure.

@@ -59,6 +59,19 @@ class Settings(BaseSettings):
     def REDIS_URL(self) -> str:
         return f"redis://{self.REDIS_HOST}:{self.REDIS_PORT}/0"
 
+    # VAD Settings
+    VAD_THRESHOLD: float = 0.5
+    VAD_SAMPLE_RATE: int = 16000
+    VAD_FRAME_SIZE: int = 512
+
+    # STT Settings
+    STT_MODEL_SIZE: str = "base"
+    STT_COMPUTE_TYPE: str = "default"
+
+    # LLM Settings
+    LLM_MODEL_NAME: str = "qwen2.5:3b"
+    OLLAMA_BASE_URL: str = "http://localhost:11434"
+
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",

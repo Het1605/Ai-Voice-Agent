@@ -1,10 +1,20 @@
 from abc import ABC, abstractmethod
 
+from typing import Optional
+from pydantic import BaseModel
+
+class TranscriptionResult(BaseModel):
+    """Structured response from the STT provider."""
+    text: str
+    confidence: Optional[float] = None
+    language: Optional[str] = None
+    metadata: Optional[dict] = None
+
 class IAudioTranscriber(ABC):
     """
     Contract for Speech-to-Text (STT) providers.
     The Runtime uses this to stream raw audio bytes and expects the provider 
-    to push transcripts back onto the EventBus.
+    to return a structured TranscriptionResult.
     """
     
     @abstractmethod
@@ -13,11 +23,9 @@ class IAudioTranscriber(ABC):
         pass
         
     @abstractmethod
-    async def process_audio(self, audio_chunk: bytes) -> None:
+    async def process_audio(self, audio_chunk: bytes) -> TranscriptionResult:
         """
-        Sends raw audio bytes to the provider. 
-        This method must be non-blocking. The adapter is responsible for pushing 
-        the resulting text onto the Runtime's EventBus.
+        Sends raw audio bytes to the provider and returns the transcription.
         """
         pass
         

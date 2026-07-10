@@ -33,3 +33,6 @@ yarn-error.log*
 # Database & Cache Data
 pgdata/
 redisdata/
+
+# AI Models (Do not commit large binaries!)
+backend/models/
