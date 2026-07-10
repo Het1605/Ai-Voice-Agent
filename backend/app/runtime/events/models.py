@@ -14,8 +14,15 @@ class EventType(str, Enum):
     USER_STARTED_SPEAKING = "USER_STARTED_SPEAKING"
     USER_STOPPED_SPEAKING = "USER_STOPPED_SPEAKING"
     
+    # Conversational Flow
+    TRANSCRIPT_READY = "TRANSCRIPT_READY"
+    AI_SPEAKING_COMPLETED = "AI_SPEAKING_COMPLETED"
+    CONVERSATION_COMPLETED = "CONVERSATION_COMPLETED"
+    
+    # Lifecycle commands
+    SHUTDOWN_REQUESTED = "SHUTDOWN_REQUESTED"
+    
     # Placeholders for future Provider events
-    # TRANSCRIPT_READY = "TRANSCRIPT_READY"
     # LLM_TOKEN = "LLM_TOKEN"
 
 class RuntimeEvent(BaseModel):

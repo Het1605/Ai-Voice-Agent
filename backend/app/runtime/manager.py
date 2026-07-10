@@ -4,6 +4,7 @@ import logging
 from typing import Dict, Optional
 
 from .call_runtime import CallRuntime
+from .events.models import EventType
 
 logger = logging.getLogger(__name__)
 
@@ -39,6 +40,12 @@ class RuntimeManager:
             self._runtimes_by_session_id[session_id] = runtime
             if call_id:
                 self._runtimes_by_call_id[call_id] = runtime
+                
+        # Subscribe to shutdown requests to safely deregister
+        async def _on_shutdown(event):
+            await self.end_runtime(event.session_id)
+            
+        runtime.event_bus.subscribe(EventType.SHUTDOWN_REQUESTED, _on_shutdown)
                 
         logger.info(f"Registered CallRuntime {session_id} (Call ID: {call_id})")
         return runtime

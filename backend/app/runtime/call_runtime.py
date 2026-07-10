@@ -7,6 +7,8 @@ from .context import RuntimeContext
 from .event_bus import EventBus
 from .events.models import RuntimeEvent, EventType
 from .session_sync import SessionSynchronizer
+from .engine import ConversationEngine
+from .flow_controller import ConversationFlowController
 
 logger = logging.getLogger(__name__)
 
@@ -28,10 +30,29 @@ class CallRuntime:
             event_bus=self.event_bus
         )
         
+        # Instantiate the Conversation Engine (The Executor)
+        self.conversation_engine = ConversationEngine(
+            session_id=self.session.session_id,
+            context=self.context,
+            event_bus=self.event_bus
+        )
+        
+        # Instantiate the Conversation Flow Controller (The Navigator)
+        self.flow_controller = ConversationFlowController(
+            session_id=self.session.session_id,
+            context=self.context,
+            event_bus=self.event_bus
+        )
+        
         self._is_active = False
         
-        # Attach the Event Bus to the runtime context immediately
-        self.initialize(event_bus=self.event_bus, session_synchronizer=self.synchronizer)
+        # Attach components to the runtime context registry immediately
+        self.initialize(
+            event_bus=self.event_bus, 
+            session_synchronizer=self.synchronizer,
+            conversation_engine=self.conversation_engine,
+            flow_controller=self.flow_controller
+        )
         
         logger.info(f"CallRuntime created for session {self.session.session_id}")
 
