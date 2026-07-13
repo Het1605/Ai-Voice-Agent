@@ -31,3 +31,6 @@ faster-whisper>=1.0.0
 # TTS Dependencies
 kokoro-onnx
 soundfile
+
+# Audio I/O
+sounddevice

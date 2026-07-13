@@ -11,7 +11,7 @@ workspace_root = os.path.join(backend_dir, "..")
 sys.path.append(os.path.abspath(backend_dir))
 sys.path.append(os.path.abspath(workspace_root))
 
-from app.adapters.stt.faster_whisper_adapter import FasterWhisperAdapter
+from app.infrastructure.ai.faster_whisper import FasterWhisperAdapter
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger("STT_Demo")

@@ -9,11 +9,11 @@ backend_dir = os.path.join(os.path.dirname(__file__), "..")
 sys.path.append(os.path.abspath(backend_dir))
 sys.path.append(os.path.abspath(os.path.join(backend_dir, "..")))
 
-from app.runtime.call_runtime import CallRuntime
-from app.runtime.events.models import RuntimeEvent, EventType
-from app.adapters.llm.ollama_adapter import OllamaAdapter
-from app.adapters.tts.kokoro_adapter import KokoroAdapter
-from app.runtime.orchestrator.hybrid_orchestrator import HybridOrchestrator
+from app.voice_engine.core.call_runtime import CallRuntime
+from app.voice_engine.events.models import RuntimeEvent, EventType
+from app.infrastructure.ai.ollama import OllamaAdapter
+from app.infrastructure.ai.kokoro import KokoroAdapter
+from app.voice_engine.orchestrators.hybrid import HybridOrchestrator
 from app.core.config import settings
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")

@@ -11,7 +11,7 @@ workspace_root = os.path.join(backend_dir, "..")
 sys.path.append(os.path.abspath(backend_dir))
 sys.path.append(os.path.abspath(workspace_root))
 
-from app.adapters.tts.kokoro_adapter import KokoroAdapter
+from app.infrastructure.ai.kokoro import KokoroAdapter
 from app.core.config import settings
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
