@@ -27,3 +27,7 @@ numpy>=1.26.0
 
 # STT Dependencies
 faster-whisper>=1.0.0
+
+# TTS Dependencies
+kokoro-onnx
+soundfile

@@ -23,6 +23,7 @@ class EventType(str, Enum):
     SHUTDOWN_REQUESTED = "SHUTDOWN_REQUESTED"
     
     # Placeholders for future Provider events
+    AUDIO_OUT = "AUDIO_OUT"
     # LLM_TOKEN = "LLM_TOKEN"
 
 class RuntimeEvent(BaseModel):

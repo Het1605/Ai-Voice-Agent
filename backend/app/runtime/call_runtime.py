@@ -17,7 +17,7 @@ class CallRuntime:
     The master orchestrator for a single active AI phone call.
     This class enforces strict isolation boundaries and a predictable lifecycle.
     """
-    def __init__(self, agent_id: Optional[uuid.UUID] = None, call_id: Optional[str] = None):
+    def __init__(self, agent_id: Optional[uuid.UUID] = None, call_id: Optional[str] = None, orchestrator=None):
         """Birth: Creates the isolated business and execution containers."""
         self.session = CallSession(agent_id=agent_id, call_id=call_id)
         self.context = RuntimeContext()
@@ -34,7 +34,8 @@ class CallRuntime:
         self.conversation_engine = ConversationEngine(
             session_id=self.session.session_id,
             context=self.context,
-            event_bus=self.event_bus
+            event_bus=self.event_bus,
+            orchestrator=orchestrator
         )
         
         # Instantiate the Conversation Flow Controller (The Navigator)

@@ -43,6 +43,9 @@ class ConversationEngine:
             
         logger.info(f"[{self.session_id}] Received Transcript: '{text}'")
         
+        # Append to conversation history BEFORE thinking
+        self.context.history.append({"role": "user", "content": text})
+        
         # Update state
         self.context.update_metadata("conversation_state", "THINKING")
         self.event_bus.publish(RuntimeEvent(

@@ -72,6 +72,12 @@ class Settings(BaseSettings):
     LLM_MODEL_NAME: str = "qwen2.5:3b"
     OLLAMA_BASE_URL: str = "http://localhost:11434"
 
+    # TTS Settings
+    TTS_MODEL: str = "kokoro-v1.0.onnx"
+    TTS_VOICES_FILE: str = "voices-v1.0.bin"
+    TTS_DEFAULT_VOICE: str = "af_heart"
+    TTS_SAMPLE_RATE: int = 24000
+
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",
