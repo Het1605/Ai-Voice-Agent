@@ -91,7 +91,7 @@ class HybridOrchestrator(IOrchestrator):
                                     self.event_bus.publish(RuntimeEvent(
                                         event_type=EventType.AUDIO_OUT,
                                         session_id=self.session_id,
-                                        payload={"audio_bytes": audio_chunk}
+                                        payload={"audio_frame": audio_chunk}
                                     ))
                             else:
                                 logger.warning(f"[{self.session_id}] Tool call received but no Workflow Engine configured!")
@@ -114,7 +114,7 @@ class HybridOrchestrator(IOrchestrator):
                     self.event_bus.publish(RuntimeEvent(
                         event_type=EventType.AUDIO_OUT,
                         session_id=self.session_id,
-                        payload={"audio_bytes": audio_chunk}
+                        payload={"audio_frame": audio_chunk}
                     ))
                     
                 if self.state == OrchestratorState.CANCELLED:

@@ -58,10 +58,12 @@ class TranscriptionResult(BaseModel):
     language: Optional[str] = None
     metadata: Optional[dict] = None
 
+from backend.app.voice_engine.core.audio import AudioFrame
+
 class IAudioTranscriber(ABC):
     """
     Contract for Speech-to-Text (STT) providers.
-    The Runtime uses this to stream raw audio bytes and expects the provider 
+    The Runtime uses this to stream normalized AudioFrames and expects the provider 
     to return a structured TranscriptionResult.
     """
     
@@ -71,9 +73,9 @@ class IAudioTranscriber(ABC):
         pass
         
     @abstractmethod
-    async def process_audio(self, audio_chunk: bytes) -> TranscriptionResult:
+    async def process_audio(self, audio_frame: AudioFrame) -> TranscriptionResult:
         """
-        Sends raw audio bytes to the provider and returns the transcription.
+        Sends an AudioFrame to the provider and returns the transcription.
         """
         pass
         
@@ -88,13 +90,13 @@ class IAudioSynthesizer(ABC):
     """
     Contract for Text-to-Speech (TTS) providers.
     The Runtime expects this provider to take an AI-generated text string
-    and yield playable audio bytes.
+    and yield playable AudioFrames.
     """
     
     @abstractmethod
-    async def generate_audio_stream(self, text: str) -> AsyncGenerator[bytes, None]:
+    async def generate_audio_stream(self, text: str) -> AsyncGenerator[AudioFrame, None]:
         """
-        Takes a string of text and yields raw playable audio bytes as fast 
+        Takes a string of text and yields synthesized AudioFrames as fast 
         as they are synthesized.
         """
         pass
@@ -112,9 +114,9 @@ class IVoiceActivityDetector(ABC):
     """
     
     @abstractmethod
-    async def process_audio(self, audio_chunk: bytes) -> VadState:
+    async def process_audio(self, audio_frame: AudioFrame) -> VadState:
         """
-        Analyzes a raw audio chunk and returns the current state (SPEAKING or SILENCE).
+        Analyzes an AudioFrame and returns the current state (SPEAKING or SILENCE).
         """
         pass
 from abc import ABC, abstractmethod

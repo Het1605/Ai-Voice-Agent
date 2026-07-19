@@ -4,6 +4,7 @@ import logging
 from typing import AsyncGenerator
 
 from backend.app.voice_engine.ports import IAudioSynthesizer
+from backend.app.voice_engine.core.audio import AudioFrame
 from backend.app.core.config import settings
 
 logger = logging.getLogger(__name__)
@@ -45,9 +46,9 @@ class KokoroAdapter(IAudioSynthesizer):
             logger.error(f"Failed to load Kokoro ONNX model: {e}")
             raise
             
-    async def generate_audio_stream(self, text: str) -> AsyncGenerator[bytes, None]:
+    async def generate_audio_stream(self, text: str) -> AsyncGenerator[AudioFrame, None]:
         """
-        Synthesizes speech from text and yields raw audio chunks (PCM bytes).
+        Synthesizes speech from text and yields AudioFrames.
         Runs synchronously inside a thread to avoid blocking the event loop.
         """
         if not text or not text.strip():
@@ -70,7 +71,12 @@ class KokoroAdapter(IAudioSynthesizer):
                     # Convert to 16-bit PCM
                     import numpy as np
                     pcm16 = (samples * 32767).astype(np.int16)
-                    yield pcm16.tobytes()
+                    yield AudioFrame(
+                        pcm_data=pcm16.tobytes(),
+                        sample_rate=sample_rate,
+                        channels=1,
+                        sample_width=2
+                    )
                     
         except Exception as e:
             logger.error(f"Error during TTS synthesis: {e}")

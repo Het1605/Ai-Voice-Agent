@@ -32,9 +32,50 @@ class RuntimeManager:
         logger.info("RuntimeManager initialized")
 
     async def create_runtime(self, agent_id: Optional[uuid.UUID] = None, call_id: Optional[str] = None) -> CallRuntime:
-        """Instantiates and registers a new CallRuntime safely."""
+        """Instantiates and registers a new CallRuntime safely. Acts as the DI Factory."""
+        # 1. Instantiate Core Adapters
+        from backend.app.infrastructure.ai.silero import SileroVadAdapter
+        from backend.app.infrastructure.ai.faster_whisper import FasterWhisperAdapter
+        from backend.app.infrastructure.ai.kokoro import KokoroAdapter
+        from backend.app.infrastructure.ai.ollama import OllamaAdapter
+        from backend.app.infrastructure.workflows.mock import MockWorkflowAdapter
+        
+        vad = SileroVadAdapter()
+        stt = FasterWhisperAdapter()
+        await stt.start_stream()
+        tts = KokoroAdapter()
+        llm = OllamaAdapter()
+        wf = MockWorkflowAdapter()
+        
+        # 2. Instantiate Runtime and Orchestrator
         runtime = CallRuntime(agent_id=agent_id, call_id=call_id)
         session_id = runtime.get_session_id()
+        
+        from backend.app.voice_engine.orchestrators.hybrid import HybridOrchestrator
+        orchestrator = HybridOrchestrator(
+            llm=llm,
+            tts=tts,
+            event_bus=runtime.event_bus,
+            session_id=session_id,
+            workflow_engine=wf
+        )
+        runtime.conversation_engine.orchestrator = orchestrator
+        
+        # 3. Instantiate AudioPipeline
+        from backend.app.voice_engine.core.audio_pipeline import AudioPipeline
+        audio_pipeline = AudioPipeline(
+            session_id=str(session_id),
+            event_bus=runtime.event_bus,
+            vad=vad,
+            stt=stt
+        )
+        
+        # Attach to runtime context
+        runtime.initialize(
+            orchestrator=orchestrator,
+            audio_pipeline=audio_pipeline,
+            stt_adapter=stt
+        )
         
         async with self._lock:
             self._runtimes_by_session_id[session_id] = runtime
@@ -43,6 +84,11 @@ class RuntimeManager:
                 
         # Subscribe to shutdown requests to safely deregister
         async def _on_shutdown(event):
+            # Clean up the STT stream
+            if hasattr(runtime.context, "get_component"):
+                stt_ref = runtime.context.get_component("stt_adapter")
+                if stt_ref:
+                    await stt_ref.close_stream()
             await self.end_runtime(event.session_id)
             
         runtime.event_bus.subscribe(EventType.SHUTDOWN_REQUESTED, _on_shutdown)

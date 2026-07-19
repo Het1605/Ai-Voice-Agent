@@ -3,6 +3,7 @@ from enum import Enum
 from datetime import datetime, UTC
 from typing import Any, Dict, Optional
 from pydantic import BaseModel, Field
+from backend.app.voice_engine.core.audio import AudioFrame
 
 class EventType(str, Enum):
     # Lifecycle
@@ -23,6 +24,7 @@ class EventType(str, Enum):
     SHUTDOWN_REQUESTED = "SHUTDOWN_REQUESTED"
     
     # Placeholders for future Provider events
+    AUDIO_IN = "AUDIO_IN"
     AUDIO_OUT = "AUDIO_OUT"
     # LLM_TOKEN = "LLM_TOKEN"
 

@@ -34,3 +34,4 @@ soundfile
 
 # Audio I/O
 sounddevice
+av>=12.0.0

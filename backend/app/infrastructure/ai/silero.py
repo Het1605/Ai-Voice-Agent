@@ -4,6 +4,7 @@ import numpy as np
 import onnxruntime as ort
 
 from backend.app.voice_engine.ports import IVoiceActivityDetector, VadState
+from backend.app.voice_engine.core.audio import AudioFrame
 from backend.app.core.config import settings
 
 logger = logging.getLogger(__name__)
@@ -51,12 +52,12 @@ class SileroVadAdapter(IVoiceActivityDetector):
         self._c = np.zeros((2, 1, 64), dtype=np.float32)
         self._audio_buffer.clear()
 
-    async def process_audio(self, audio_chunk: bytes) -> VadState:
+    async def process_audio(self, audio_frame: AudioFrame) -> VadState:
         """
-        Analyzes raw audio bytes. Buffers internally until enough samples exist.
+        Analyzes an AudioFrame. Buffers internally until enough samples exist.
         Returns VadState.SPEAKING if speech is detected, else SILENCE.
         """
-        self._audio_buffer.extend(audio_chunk)
+        self._audio_buffer.extend(audio_frame.pcm_data)
         
         current_state = VadState.SILENCE
         

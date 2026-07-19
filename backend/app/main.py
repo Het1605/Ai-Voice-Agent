@@ -83,6 +83,9 @@ app.add_middleware(
 from backend.app.api.http.v1.router import api_router
 app.include_router(api_router, prefix=settings.API_V1_STR)
 
+from backend.app.api.websockets.router import router as websocket_router
+app.include_router(websocket_router)
+
 @app.exception_handler(BaseAppException)
 async def application_exception_handler(request: Request, exc: BaseAppException) -> JSONResponse:
     """

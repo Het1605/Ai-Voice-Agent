@@ -6,6 +6,8 @@ from .session import CallSession
 from .context import RuntimeContext
 from .event_bus import EventBus
 from backend.app.voice_engine.events.models import RuntimeEvent, EventType
+from backend.app.voice_engine.core.audio import AudioFrame
+import asyncio
 from .session_sync import SessionSynchronizer
 from .engine import ConversationEngine
 from .flow_controller import ConversationFlowController
@@ -47,6 +49,10 @@ class CallRuntime:
         
         self._is_active = False
         
+        # Audio output streaming queue (populated by internal events)
+        self.audio_out_queue: asyncio.Queue = asyncio.Queue()
+        self.event_bus.subscribe(EventType.AUDIO_OUT, self._handle_audio_out)
+        
         # Attach components to the runtime context registry immediately
         self.initialize(
             event_bus=self.event_bus, 
@@ -65,6 +71,36 @@ class CallRuntime:
         for name, component in components.items():
             self.context.set_component(name, component)
             logger.debug(f"Attached component '{name}' to session {self.session.session_id}")
+
+    # ---------------------------------------------------------
+    # Public Gateway API (Encapsulates EventBus from Transports)
+    # ---------------------------------------------------------
+    
+    def receive_audio(self, frame: AudioFrame):
+        """Called by a Gateway/Bridge when new audio is decoded from the network."""
+        if not self._is_active:
+            return
+        self.event_bus.publish(RuntimeEvent(
+            event_type=EventType.AUDIO_IN,
+            session_id=self.session.session_id,
+            payload={"audio_frame": frame}
+        ))
+        
+    async def get_audio_out(self) -> AudioFrame:
+        """Called by a Gateway/Bridge to await the next outgoing AudioFrame."""
+        return await self.audio_out_queue.get()
+        
+    def interrupt(self):
+        """Called by a Gateway/Bridge to forcefully interrupt the AI."""
+        if self._is_active:
+            self.conversation_engine.interrupt()
+            
+    async def _handle_audio_out(self, event: RuntimeEvent):
+        """Internal callback to push TTS AudioFrames to the output queue."""
+        frame = event.payload.get("audio_frame")
+        if frame and isinstance(frame, AudioFrame):
+            await self.audio_out_queue.put(frame)
+            return
 
     def start(self):
         """Kicks off the active phone call."""

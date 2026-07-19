@@ -4,6 +4,7 @@ import logging
 import numpy as np
 
 from backend.app.voice_engine.ports import IAudioTranscriber, TranscriptionResult
+from backend.app.voice_engine.core.audio import AudioFrame
 from backend.app.core.config import settings
 
 logger = logging.getLogger(__name__)
@@ -80,17 +81,17 @@ class FasterWhisperAdapter(IAudioTranscriber):
             }
         )
 
-    async def process_audio(self, audio_chunk: bytes) -> TranscriptionResult:
+    async def process_audio(self, audio_frame: AudioFrame) -> TranscriptionResult:
         """
-        Receives a complete spoken utterance as raw 16kHz PCM bytes.
+        Receives a complete spoken utterance as an AudioFrame.
         Runs inference in a thread and returns the TranscriptionResult.
         """
-        if not audio_chunk:
+        if not audio_frame or not audio_frame.pcm_data:
             return TranscriptionResult(text="", confidence=0.0)
             
         # 1. Convert bytes (int16) to float32 numpy array
-        # Assuming 16kHz 16-bit Mono PCM
-        audio_int16 = np.frombuffer(audio_chunk, dtype=np.int16)
+        # Assuming audio_frame contains PCM data.
+        audio_int16 = np.frombuffer(audio_frame.pcm_data, dtype=np.int16)
         audio_float32 = audio_int16.astype(np.float32) / 32768.0
         
         # 2. Run inference in a background thread
