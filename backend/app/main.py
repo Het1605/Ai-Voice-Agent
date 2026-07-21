@@ -11,12 +11,13 @@ Architecture Fit:
 
 from contextlib import asynccontextmanager
 import logging
-from fastapi import FastAPI, Request, status
+from fastapi import FastAPI, HTTPException, Request, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from backend.app.core.config import settings
 from backend.app.core.logging_service import setup_logging
 from backend.app.core.exceptions import BaseAppException
+from backend.app.core.response import error_response
 
 # Initialize logging system immediately on launch
 setup_logging()
@@ -80,7 +81,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-from backend.app.api.http.v1.router import api_router
+from backend.app.api.v1.router import api_router
 app.include_router(api_router, prefix=settings.API_V1_STR)
 
 from backend.app.api.websockets.router import router as websocket_router
@@ -89,18 +90,51 @@ app.include_router(websocket_router)
 @app.exception_handler(BaseAppException)
 async def application_exception_handler(request: Request, exc: BaseAppException) -> JSONResponse:
     """
-    Translates custom BaseAppExceptions into formatted JSON error payloads.
+    Translates custom BaseAppExceptions into the standardized error envelope.
     """
-    response_content = {
-        "error": exc.error_code,
-        "detail": exc.detail
-    }
-    if exc.context:
-        response_content["context"] = exc.context
-        
     return JSONResponse(
         status_code=exc.status_code,
-        content=response_content
+        content=error_response(
+            code=exc.error_code,
+            message=exc.detail,
+            details=exc.context or None,
+        ).model_dump()
+    )
+
+
+@app.exception_handler(HTTPException)
+async def http_exception_handler(request: Request, exc: HTTPException) -> JSONResponse:
+    """
+    Translates FastAPI/Starlette HTTPExceptions into the standardized error envelope.
+    Catches 401 from OAuth2PasswordBearer, 404s, 405s, etc.
+    """
+    return JSONResponse(
+        status_code=exc.status_code,
+        content={
+            "success": False,
+            "error": {
+                "code": "HTTP_ERROR",
+                "message": exc.detail,
+                "details": None,
+            },
+        },
+        headers=getattr(exc, "headers", None),
+    )
+
+
+@app.exception_handler(Exception)
+async def unhandled_exception_handler(request: Request, exc: Exception) -> JSONResponse:
+    """
+    Catch-all for any unhandled Python exception.
+    Logs the full traceback and returns a sanitized 500 in the standard error format.
+    """
+    logger.exception("Unhandled exception at %s %s", request.method, request.url.path)
+    return JSONResponse(
+        status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+        content=error_response(
+            code="INTERNAL_ERROR",
+            message="An unexpected server error occurred.",
+        ).model_dump()
     )
 
 @app.get("/health")

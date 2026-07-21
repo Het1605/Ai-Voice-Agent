@@ -5,12 +5,12 @@ from fastapi import APIRouter, Depends, status, Path
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from backend.app.infrastructure.database.session import get_db
-from backend.app.modules.agents.schemas import AgentCreate, AgentUpdate, AgentResponse
-from backend.app.modules.agents.service import AgentService
-from backend.app.modules.users.models import User
-from backend.app.modules.organizations.models import OrganizationRole, OrganizationMember
-from backend.app.modules.auth.dependencies import get_current_active_user
-from backend.app.modules.organizations.dependencies import RequireOrgRole
+from backend.app.domain.agents.schemas import AgentCreate, AgentUpdate, AgentResponse
+from backend.app.domain.agents.service import AgentService
+from backend.app.domain.users.models import User
+from backend.app.domain.organization.models import OrganizationRole, OrganizationMember
+from backend.app.domain.identity.dependencies import get_current_active_user
+from backend.app.domain.organization.dependencies import RequireOrgRole
 
 router = APIRouter()
 

@@ -23,7 +23,7 @@ class OrganizationResponse(OrganizationBase):
 import uuid
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict
-from backend.app.modules.organizations.models import OrganizationRole
+from backend.app.domain.organization.models import OrganizationRole
 
 class OrganizationMemberBase(BaseModel):
     user_id: uuid.UUID
@@ -36,7 +36,7 @@ class OrganizationMemberCreate(OrganizationMemberBase):
 class OrganizationMemberUpdate(BaseModel):
     role: OrganizationRole
 
-from backend.app.modules.organizations.schemas import OrganizationResponse
+from backend.app.domain.organization.schemas import OrganizationResponse
 
 class OrganizationMemberResponse(OrganizationMemberBase):
     id: uuid.UUID

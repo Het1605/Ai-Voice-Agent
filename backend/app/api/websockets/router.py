@@ -3,7 +3,7 @@ import logging
 from backend.app.api.websockets.session import WebSocketSessionHandler
 from backend.app.api.websockets.transcoder import AudioTranscoder
 from backend.app.api.websockets.bridge import WebSocketRuntimeBridge
-from backend.app.voice_engine.core.manager import runtime_manager
+from backend.app.runtime.core.manager import runtime_manager
 
 logger = logging.getLogger(__name__)
 

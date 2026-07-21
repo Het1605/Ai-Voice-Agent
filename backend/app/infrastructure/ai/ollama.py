@@ -3,8 +3,8 @@ import logging
 import httpx
 from typing import AsyncGenerator
 
-from backend.app.voice_engine.ports import ILLMGenerator
-from backend.app.voice_engine.core.context import RuntimeContext
+from backend.app.runtime.ports import ILLMGenerator
+from backend.app.runtime.core.context import RuntimeContext
 from backend.app.core.config import settings
 
 logger = logging.getLogger(__name__)

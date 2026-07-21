@@ -2,8 +2,8 @@ import logging
 import asyncio
 from typing import Any, Dict
 
-from backend.app.voice_engine.ports import IWorkflowEngine
-from backend.app.voice_engine.core.context import RuntimeContext
+from backend.app.runtime.ports import IWorkflowEngine
+from backend.app.runtime.core.context import RuntimeContext
 
 logger = logging.getLogger(__name__)
 

@@ -11,7 +11,7 @@ sys.path.append(os.path.abspath(backend_dir))
 sys.path.append(os.path.abspath(workspace_root))
 
 from app.infrastructure.ai.ollama import OllamaAdapter
-from app.voice_engine.core.context import RuntimeContext
+from app.runtime.core.context import RuntimeContext
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger("LLM_Demo")

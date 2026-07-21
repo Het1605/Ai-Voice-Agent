@@ -18,8 +18,8 @@ import uuid
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 
-from backend.app.modules.users.models import User
-from backend.app.modules.users.schemas import UserCreate
+from backend.app.domain.users.models import User
+from backend.app.domain.users.schemas import UserCreate
 from backend.app.core.security import get_password_hash, verify_password
 from backend.app.core.jwt import create_access_token, create_refresh_token, verify_token
 from backend.app.core.exceptions import UnauthorizedException, BadRequestException, NotFoundException

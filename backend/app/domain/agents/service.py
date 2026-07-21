@@ -3,9 +3,9 @@ from typing import List, Optional
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 
-from backend.app.modules.agents.models import Agent
-from backend.app.modules.organizations.models import Organization
-from backend.app.modules.agents.schemas import AgentCreate, AgentUpdate
+from backend.app.domain.agents.models import Agent
+from backend.app.domain.organization.models import Organization
+from backend.app.domain.agents.schemas import AgentCreate, AgentUpdate
 from backend.app.core.exceptions import NotFoundException, BadRequestException
 
 

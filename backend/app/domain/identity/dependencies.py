@@ -9,13 +9,16 @@ Architecture Fit:
 
 from typing import List
 from fastapi import Depends
+from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from backend.app.api.dependencies import get_db_session
+from backend.app.core.config import settings
 from backend.app.core.exceptions import UnauthorizedException
-from backend.app.modules.users.models import User, SystemRole
-from backend.app.modules.auth.service import AuthService
-from backend.app.modules.auth.router import oauth2_scheme
+from backend.app.domain.users.models import User, SystemRole
+from backend.app.domain.identity.services.service import AuthService
+
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl=f"{settings.API_V1_STR}/auth/login")
 
 
 async def get_current_active_user(

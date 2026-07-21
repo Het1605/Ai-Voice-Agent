@@ -6,8 +6,8 @@ from typing import Optional
 from backend.app.api.websockets.session import WebSocketSessionHandler
 from backend.app.api.websockets.transcoder import AudioTranscoder
 from backend.app.api.websockets.schemas import AudioPacket, ControlPacket, PacketType
-from backend.app.voice_engine.core.call_runtime import CallRuntime
-from backend.app.voice_engine.core.audio import AudioFrame
+from backend.app.runtime.core.call_runtime import CallRuntime
+from backend.app.runtime.core.audio import AudioFrame
 
 logger = logging.getLogger(__name__)
 

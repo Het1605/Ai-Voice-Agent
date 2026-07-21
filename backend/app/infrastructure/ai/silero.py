@@ -3,8 +3,8 @@ import logging
 import numpy as np
 import onnxruntime as ort
 
-from backend.app.voice_engine.ports import IVoiceActivityDetector, VadState
-from backend.app.voice_engine.core.audio import AudioFrame
+from backend.app.runtime.ports import IVoiceActivityDetector, VadState
+from backend.app.runtime.core.audio import AudioFrame
 from backend.app.core.config import settings
 
 logger = logging.getLogger(__name__)

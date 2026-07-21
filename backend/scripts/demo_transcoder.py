@@ -10,7 +10,7 @@ sys.path.append(os.path.abspath(backend_dir))
 sys.path.append(os.path.abspath(os.path.join(backend_dir, "..")))
 
 from app.api.websockets.transcoder import AudioTranscoder
-from app.voice_engine.core.audio import AudioFrame
+from app.runtime.core.audio import AudioFrame
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("TranscoderTest")
