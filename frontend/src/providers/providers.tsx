@@ -3,6 +3,7 @@
 import { ThemeProvider } from 'next-themes';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { ReactQueryProvider } from '@/providers/query-provider';
+import { AuthProvider } from '@/contexts/auth-context';
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
@@ -14,7 +15,9 @@ export function Providers({ children }: { children: React.ReactNode }) {
         disableTransitionOnChange
       >
         <TooltipProvider delay={300}>
-          {children}
+          <AuthProvider>
+            {children}
+          </AuthProvider>
         </TooltipProvider>
       </ThemeProvider>
     </ReactQueryProvider>

@@ -1,0 +1,72 @@
+/**
+ * Utility Classes & Keyframes
+ *
+ * Business-agnostic utility classes and animation keyframes.
+ * Imported alongside globals.css in the root layout.
+ */
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Custom Utilities
+   ═══════════════════════════════════════════════════════════════════════════ */
+@layer utilities {
+  /* Frosted glass effect for cards, nav, etc. */
+  .glass {
+    background: color-mix(in oklch, var(--card) 80%, transparent);
+    backdrop-filter: blur(20px) saturate(1.5);
+  }
+
+  /* Gradient text for brand headings */
+  .gradient-text {
+    background: linear-gradient(135deg, var(--primary), oklch(0.70 0.18 220));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Glowing active nav item */
+  .nav-glow {
+    box-shadow: 0 0 12px color-mix(in oklch, var(--primary) 25%, transparent);
+  }
+
+  /* Entry animations */
+  .animate-in-fade {
+    animation: fadeIn 0.2s ease-out;
+  }
+
+  .animate-in-slide {
+    animation: slideIn 0.2s ease-out;
+  }
+
+  /* Truncate with ellipsis */
+  .truncate-1 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+  }
+
+  .truncate-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Keyframes
+   ═══════════════════════════════════════════════════════════════════════════ */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-8px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 4px color-mix(in oklch, var(--primary) 20%, transparent); }
+  50% { box-shadow: 0 0 16px color-mix(in oklch, var(--primary) 40%, transparent); }
+}
