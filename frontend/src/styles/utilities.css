@@ -28,6 +28,11 @@
     box-shadow: 0 0 12px color-mix(in oklch, var(--primary) 25%, transparent);
   }
 
+  /* Global loader animation — slides a slim bar across the screen */
+  .animate-loader-slide {
+    animation: loaderSlide 1.2s ease-in-out infinite;
+  }
+
   /* Entry animations */
   .animate-in-fade {
     animation: fadeIn 0.2s ease-out;
@@ -69,4 +74,11 @@
 @keyframes pulse-glow {
   0%, 100% { box-shadow: 0 0 4px color-mix(in oklch, var(--primary) 20%, transparent); }
   50% { box-shadow: 0 0 16px color-mix(in oklch, var(--primary) 40%, transparent); }
+}
+
+/* Global loader — bar sweeps from left to right */
+@keyframes loaderSlide {
+  0% { transform: translateX(-100%); }
+  50% { transform: translateX(200%); }
+  100% { transform: translateX(400%); }
 }

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import '../styles/globals.css';
 import '../styles/utilities.css';
 import { Providers } from '@/providers/providers';
+import { GlobalLoader } from '@/components/shell';
 
 export const metadata: Metadata = {
   title: {
@@ -15,6 +16,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
+        <GlobalLoader />
         <Providers>
           {children}
         </Providers>

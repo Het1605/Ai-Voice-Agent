@@ -3,17 +3,18 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import { clientNavigation, NavItem } from '@/navigation/client-nav';
+import { routes, groupRoutes } from '@/navigation';
+import type { RouteDefinition } from '@/navigation';
 import { Bot, ChevronLeft, ChevronRight } from 'lucide-react';
-import { useUIStore } from '@/store/ui-store';
+import { useShellStore } from '@/store/shell-store';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
 import { Button } from '@/components/ui/button';
 
-function NavLink({ item, collapsed }: { item: NavItem; collapsed: boolean }) {
+function NavLink({ item, collapsed }: { item: RouteDefinition; collapsed: boolean }) {
   const pathname = usePathname();
-  const isActive = pathname === item.href || pathname.startsWith(item.href + '/');
+  const isActive = pathname === item.href || (pathname.startsWith(item.href + '/') && !item.exact);
   const Icon = item.icon;
 
   const content = (
@@ -28,12 +29,14 @@ function NavLink({ item, collapsed }: { item: NavItem; collapsed: boolean }) {
         collapsed && 'justify-center px-2',
       )}
     >
-      <Icon
-        className={cn(
-          'h-4 w-4 shrink-0 transition-colors',
-          isActive ? 'text-sidebar-primary' : 'text-sidebar-foreground/50 group-hover:text-sidebar-foreground',
-        )}
-      />
+      {item.icon && (
+        <item.icon
+          className={cn(
+            'h-4 w-4 shrink-0 transition-colors',
+            isActive ? 'text-sidebar-primary' : 'text-sidebar-foreground/50 group-hover:text-sidebar-foreground',
+          )}
+        />
+      )}
       {!collapsed && (
         <span className="truncate">{item.title}</span>
       )}
@@ -58,8 +61,12 @@ function NavLink({ item, collapsed }: { item: NavItem; collapsed: boolean }) {
 }
 
 export function Sidebar() {
-  const { isSidebarOpen, toggleSidebar } = useUIStore();
-  const collapsed = !isSidebarOpen;
+  const { collapsed, toggleCollapsed } = useShellStore();
+  const navGroups = groupRoutes(routes.filter((r) => !r.hidden && r.group));
+  const groupOrder = ['main', 'org'];
+  const orderedGroups = groupOrder
+    .map((key) => ({ title: key === 'org' ? 'Organization' : undefined, items: navGroups[key] || [] }))
+    .filter((g) => g.items.length > 0);
 
   return (
     <aside
@@ -86,7 +93,7 @@ export function Sidebar() {
       {/* Nav Sections */}
       <ScrollArea className="flex-1 py-3">
         <div className="space-y-4 px-2">
-          {clientNavigation.map((section, si) => (
+          {orderedGroups.map((section, si) => (
             <div key={si}>
               {section.title && !collapsed && (
                 <p className="mb-1 px-3 text-[10px] font-semibold uppercase tracking-widest text-sidebar-foreground/40">
@@ -96,7 +103,7 @@ export function Sidebar() {
               {section.title && collapsed && <Separator className="mx-auto w-8 bg-sidebar-border" />}
               <div className="space-y-0.5">
                 {section.items.map((item) => (
-                  <NavLink key={item.href} item={item} collapsed={collapsed} />
+                  <NavLink key={item.id} item={item} collapsed={collapsed} />
                 ))}
               </div>
             </div>
@@ -109,7 +116,7 @@ export function Sidebar() {
         <Button
           variant="ghost"
           size="sm"
-          onClick={toggleSidebar}
+          onClick={toggleCollapsed}
           className={cn(
             'w-full text-sidebar-foreground/60 hover:text-sidebar-foreground hover:bg-sidebar-accent',
             collapsed ? 'justify-center px-0' : 'justify-end',
