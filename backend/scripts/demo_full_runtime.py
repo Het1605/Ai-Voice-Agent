@@ -13,6 +13,7 @@ sys.path.append(os.path.abspath(os.path.join(backend_dir, "..")))
 
 from app.voice_engine.core.call_runtime import CallRuntime
 from app.voice_engine.events.models import RuntimeEvent, EventType
+from app.voice_engine.core.audio import AudioFrame
 from app.infrastructure.ai.faster_whisper import FasterWhisperAdapter
 from app.infrastructure.ai.silero import SileroVadAdapter
 from app.infrastructure.ai.ollama import OllamaAdapter
@@ -55,9 +56,9 @@ async def main():
     playback_buffer = bytearray()
     
     async def handle_audio_out(event: RuntimeEvent):
-        audio_bytes = event.payload.get("audio_bytes")
-        if audio_bytes:
-            audio_out_queue.put(audio_bytes)
+        audio_frame = event.payload.get("audio_frame")
+        if audio_frame and isinstance(audio_frame, AudioFrame):
+            audio_out_queue.put(audio_frame.pcm_data)
             
     runtime.event_bus.subscribe(EventType.AUDIO_OUT, handle_audio_out)
     
@@ -138,7 +139,13 @@ async def main():
                 
                 # Run VAD
                 vad_start = time.time()
-                vad_state = await vad_adapter.process_audio(audio_bytes)
+                vad_frame = AudioFrame(
+                    pcm_data=audio_bytes,
+                    sample_rate=settings.VAD_SAMPLE_RATE,
+                    channels=1,
+                    sample_width=2
+                )
+                vad_state = await vad_adapter.process_audio(vad_frame)
                 metrics["VAD_Detection_Time"] = time.time() - vad_start
                 
                 if vad_state.name == "SPEAKING":
@@ -160,7 +167,13 @@ async def main():
                             
                             # 1. STT Phase
                             stt_start = time.time()
-                            stt_result = await stt_adapter.process_audio(bytes(speech_buffer))
+                            stt_frame = AudioFrame(
+                                pcm_data=bytes(speech_buffer),
+                                sample_rate=settings.VAD_SAMPLE_RATE, # STT uses 16kHz like VAD
+                                channels=1,
+                                sample_width=2
+                            )
+                            stt_result = await stt_adapter.process_audio(stt_frame)
                             metrics["STT_Latency"] = time.time() - stt_start
                             
                             transcript = stt_result.text.strip()
