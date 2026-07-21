@@ -1,1 +1,12 @@
-export default function AgentPage() { return <div><h1 className="text-2xl font-semibold">knowledge</h1></div>; }
+import { Section, SectionHeader } from '@/components/layout';
+import { EmptyState } from '@/components/ui/empty-state';
+import { BookOpen } from 'lucide-react';
+
+export default function AgentKnowledgePage() {
+  return (
+    <Section>
+      <SectionHeader title="Knowledge Sources" description="Documents and data linked to this agent" />
+      <EmptyState icon={BookOpen} title="No knowledge sources" description="Attach knowledge bases to give your agent domain-specific information." />
+    </Section>
+  );
+}

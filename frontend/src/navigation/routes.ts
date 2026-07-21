@@ -6,12 +6,6 @@
  * all consume this same configuration.
  *
  * Adding a new route = one entry here. No scattered configs.
- *
- * Guideline for groups:
- *   "main"   → primary sidebar section (Dashboard, Agents, Calls…)
- *   "org"    → organization section (Team, Billing, Settings…)
- *   "admin"  → system management (hidden from client sidebar)
- *   "auth"   → authentication pages (hidden from sidebar)
  */
 
 import {
@@ -24,10 +18,15 @@ import {
   CreditCard,
   Puzzle,
   Settings,
+  UserCircle,
+  Bell,
   Shield,
   Building2,
   UserCog,
   FileSearch,
+  LogIn,
+  UserPlus,
+  KeyRound,
   type LucideIcon,
 } from 'lucide-react';
 import type { PermissionRole } from './permissions';
@@ -68,6 +67,35 @@ export interface RouteDefinition {
 // ─── Registry ─────────────────────────────────────────────────────────────────
 
 export const routes: RouteDefinition[] = [
+  // ── Auth (hidden from sidebar) ─────────────────────────────────────────
+  {
+    id: 'auth.login',
+    title: 'Sign In',
+    href: '/login',
+    icon: LogIn,
+    group: 'auth',
+    hidden: true,
+    order: 1,
+  },
+  {
+    id: 'auth.register',
+    title: 'Create Account',
+    href: '/register',
+    icon: UserPlus,
+    group: 'auth',
+    hidden: true,
+    order: 2,
+  },
+  {
+    id: 'auth.forgot-password',
+    title: 'Reset Password',
+    href: '/forgot-password',
+    icon: KeyRound,
+    group: 'auth',
+    hidden: true,
+    order: 3,
+  },
+
   // ── Main ──────────────────────────────────────────────────────────────
   {
     id: 'dashboard',
@@ -78,6 +106,7 @@ export const routes: RouteDefinition[] = [
     permission: 'member',
     order: 1,
     description: 'Platform overview and key metrics',
+    keywords: ['overview', 'metrics', 'home'],
   },
   {
     id: 'agents.list',
@@ -88,6 +117,17 @@ export const routes: RouteDefinition[] = [
     permission: 'member',
     order: 2,
     description: 'Manage AI voice agents',
+    keywords: ['bots', 'voice agents', 'config'],
+  },
+  {
+    id: 'agents.detail',
+    title: 'Agent',
+    href: '/agents/[id]',
+    group: 'main',
+    permission: 'member',
+    hidden: true,
+    parentId: 'agents.list',
+    exact: true,
   },
   {
     id: 'calls.list',
@@ -98,6 +138,17 @@ export const routes: RouteDefinition[] = [
     permission: 'member',
     order: 3,
     description: 'Call history and recordings',
+    keywords: ['conversations', 'logs', 'recordings'],
+  },
+  {
+    id: 'calls.detail',
+    title: 'Call Details',
+    href: '/calls/[id]',
+    group: 'main',
+    permission: 'member',
+    hidden: true,
+    parentId: 'calls.list',
+    exact: true,
   },
   {
     id: 'knowledge.list',
@@ -108,6 +159,16 @@ export const routes: RouteDefinition[] = [
     permission: 'member',
     order: 4,
     description: 'Knowledge bases and documents',
+    keywords: ['documents', 'sources', 'collections'],
+  },
+  {
+    id: 'knowledge.detail',
+    title: 'Knowledge Base',
+    href: '/knowledge/[id]',
+    group: 'main',
+    permission: 'member',
+    hidden: true,
+    parentId: 'knowledge.list',
   },
   {
     id: 'analytics.overview',
@@ -115,9 +176,10 @@ export const routes: RouteDefinition[] = [
     href: '/analytics',
     icon: BarChart3,
     group: 'main',
-    permission: 'member',
+    permission: 'admin',
     order: 5,
     description: 'Usage analytics and reports',
+    keywords: ['metrics', 'reports', 'usage', 'statistics'],
   },
 
   // ── Organization ──────────────────────────────────────────────────────
@@ -127,9 +189,10 @@ export const routes: RouteDefinition[] = [
     href: '/team',
     icon: Users,
     group: 'org',
-    permission: 'member',
+    permission: 'admin',
     order: 1,
     description: 'Manage team members and roles',
+    keywords: ['members', 'roles', 'invitations'],
   },
   {
     id: 'billing.overview',
@@ -137,10 +200,11 @@ export const routes: RouteDefinition[] = [
     href: '/billing',
     icon: CreditCard,
     group: 'org',
-    permission: 'admin',
+    permission: 'owner',
     featureFlag: 'enableStripeBilling',
     order: 2,
     description: 'Subscription and invoices',
+    keywords: ['plan', 'subscription', 'invoices', 'payments'],
   },
   {
     id: 'integrations.list',
@@ -151,6 +215,7 @@ export const routes: RouteDefinition[] = [
     permission: 'admin',
     order: 3,
     description: 'Third-party integrations',
+    keywords: ['connectors', 'twilio', 'api', 'webhooks'],
   },
   {
     id: 'settings.general',
@@ -161,9 +226,74 @@ export const routes: RouteDefinition[] = [
     permission: 'member',
     order: 4,
     description: 'Organization settings',
+    keywords: ['preferences', 'config'],
+  },
+  {
+    id: 'settings.security',
+    title: 'Security',
+    href: '/settings/security',
+    group: 'org',
+    permission: 'admin',
+    order: 5,
+    hidden: true,
+    parentId: 'settings.general',
+  },
+  {
+    id: 'settings.notifications',
+    title: 'Notifications',
+    href: '/settings/notifications',
+    group: 'org',
+    permission: 'member',
+    order: 6,
+    hidden: true,
+    parentId: 'settings.general',
+  },
+  {
+    id: 'settings.api-keys',
+    title: 'API Keys',
+    href: '/settings/api-keys',
+    group: 'org',
+    permission: 'admin',
+    order: 7,
+    hidden: true,
+    parentId: 'settings.general',
   },
 
-  // ── Admin (hidden from regular sidebar) ───────────────────────────────
+  // ── Profile (accessible from user menu) ───────────────────────────────
+  {
+    id: 'profile',
+    title: 'Profile',
+    href: '/profile',
+    icon: UserCircle,
+    permission: 'member',
+    hidden: true,
+    order: 1,
+    description: 'Manage your personal profile',
+  },
+
+  // ── Future modules (structure scaffolding) ────────────────────────────
+  {
+    id: 'notifications',
+    title: 'Notifications',
+    href: '/notifications',
+    icon: Bell,
+    permission: 'member',
+    hidden: true,
+    order: 1,
+    description: 'Notification history and preferences',
+  },
+  {
+    id: 'audit-logs',
+    title: 'Audit Logs',
+    href: '/audit-logs',
+    icon: FileSearch,
+    permission: 'admin',
+    hidden: true,
+    order: 2,
+    description: 'Organization audit trail',
+  },
+
+  // ── Admin (system management, hidden from client sidebar) ─────────────
   {
     id: 'admin.dashboard',
     title: 'Admin Dashboard',
@@ -173,6 +303,7 @@ export const routes: RouteDefinition[] = [
     permission: 'admin',
     hidden: true,
     order: 1,
+    description: 'System administration overview',
   },
   {
     id: 'admin.organizations',
@@ -183,6 +314,7 @@ export const routes: RouteDefinition[] = [
     permission: 'admin',
     hidden: true,
     order: 2,
+    description: 'Manage organizations',
   },
   {
     id: 'admin.users',
@@ -193,6 +325,7 @@ export const routes: RouteDefinition[] = [
     permission: 'admin',
     hidden: true,
     order: 3,
+    description: 'Manage system users',
   },
   {
     id: 'admin.audit-logs',
@@ -203,6 +336,7 @@ export const routes: RouteDefinition[] = [
     permission: 'admin',
     hidden: true,
     order: 4,
+    description: 'System audit trail',
   },
 ];
 
@@ -239,10 +373,8 @@ export function getRouteById(id: string): RouteDefinition | undefined {
 
 /** Look up a route definition by its `href`. */
 export function getRouteByHref(href: string): RouteDefinition | undefined {
-  // Check exact match first
   const exact = routes.find((r) => r.href === href);
   if (exact) return exact;
-  // Fall back to prefix match (for nested routes under a parent)
   return routes.find((r) => href.startsWith(r.href) && r.exact !== false);
 }
 
@@ -265,7 +397,6 @@ export function groupRoutes(routeList: RouteDefinition[]): Record<string, RouteD
     if (!groups[g]) groups[g] = [];
     groups[g].push(route);
   }
-  // Sort each group by order
   for (const g of Object.keys(groups)) {
     groups[g].sort((a, b) => (a.order ?? 99) - (b.order ?? 99));
   }
