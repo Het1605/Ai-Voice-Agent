@@ -12,8 +12,8 @@ from abc import ABC, abstractmethod
 from typing import AsyncGenerator, Any, Dict, Optional
 from pydantic import BaseModel
 
-from backend.app.runtime.core.context import RuntimeContext
-from backend.app.runtime.core.audio import AudioFrame
+from app.runtime.core.context import RuntimeContext
+from app.runtime.core.audio import AudioFrame
 
 
 class ILLMGenerator(ABC):

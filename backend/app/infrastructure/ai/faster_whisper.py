@@ -3,9 +3,9 @@ import asyncio
 import logging
 import numpy as np
 
-from backend.app.runtime.ports import IAudioTranscriber, TranscriptionResult
-from backend.app.runtime.core.audio import AudioFrame
-from backend.app.core.config import settings
+from app.runtime.ports import IAudioTranscriber, TranscriptionResult
+from app.runtime.core.audio import AudioFrame
+from app.core.config import settings
 
 logger = logging.getLogger(__name__)
 

@@ -1,8 +1,8 @@
 import asyncio
 import logging
-from backend.app.runtime.core.manager import runtime_manager
-from backend.app.runtime.mocks.providers import MockSTT, MockLLM, MockTTS, MockOrchestrator
-from backend.app.runtime.events.models import RuntimeEvent, EventType
+from app.runtime.core.manager import runtime_manager
+from app.runtime.mocks.providers import MockSTT, MockLLM, MockTTS, MockOrchestrator
+from app.runtime.events.models import RuntimeEvent, EventType
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)

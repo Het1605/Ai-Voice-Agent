@@ -3,10 +3,10 @@ from typing import List, Optional
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 
-from backend.app.domain.agents.models import Agent
-from backend.app.domain.organization.models import Organization
-from backend.app.domain.agents.schemas import AgentCreate, AgentUpdate
-from backend.app.core.exceptions import NotFoundException, BadRequestException
+from app.domain.agents.models import Agent
+from app.domain.organization.models import Organization
+from app.domain.agents.schemas import AgentCreate, AgentUpdate
+from app.core.exceptions import NotFoundException, BadRequestException
 
 
 class AgentService:

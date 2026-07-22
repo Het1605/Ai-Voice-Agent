@@ -3,9 +3,9 @@ import asyncio
 import logging
 from typing import AsyncGenerator
 
-from backend.app.runtime.ports import IAudioSynthesizer
-from backend.app.runtime.core.audio import AudioFrame
-from backend.app.core.config import settings
+from app.runtime.ports import IAudioSynthesizer
+from app.runtime.core.audio import AudioFrame
+from app.core.config import settings
 
 logger = logging.getLogger(__name__)
 

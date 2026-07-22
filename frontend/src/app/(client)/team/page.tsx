@@ -1,3 +1,5 @@
+'use client';
+
 import { PageContainer, ContentContainer, PageHeader, Section, SectionHeader } from '@/components/layout';
 import { EmptyState } from '@/components/ui/empty-state';
 import { Button } from '@/components/ui/button';

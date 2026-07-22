@@ -8,9 +8,9 @@ import type React from 'react';
 export interface AppShellProps {
   /** Main content area */
   children: React.ReactNode;
-  /** Sidebar component (defaults to the built-in Sidebar if omitted) */
+  /** Sidebar component (pass ShellSidebar or undefined to hide) */
   sidebar?: React.ReactNode;
-  /** Header component (defaults to the built-in Header if omitted) */
+  /** Header component (pass ShellHeader or undefined to hide) */
   header?: React.ReactNode;
   /** Hide the sidebar entirely */
   hideSidebar?: boolean;

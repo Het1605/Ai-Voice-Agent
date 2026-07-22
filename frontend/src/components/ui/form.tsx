@@ -169,7 +169,7 @@ function FormLabel({
 // FormDescription
 // ═════════════════════════════════════════════════════════════════════════════
 
-export interface FormDescriptionProps extends React.ComponentProps<'p'> {}
+export type FormDescriptionProps = React.ComponentProps<'p'>;
 
 /**
  * FormDescription
@@ -252,7 +252,7 @@ function FormMessage({
 // RequiredIndicator
 // ═════════════════════════════════════════════════════════════════════════════
 
-export interface RequiredIndicatorProps extends React.ComponentProps<'span'> {}
+export type RequiredIndicatorProps = React.ComponentProps<'span'>;
 
 /**
  * RequiredIndicator

@@ -5,10 +5,10 @@ from fastapi import Request, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 
-from backend.app.domain.identity.dependencies import get_current_active_user
-from backend.app.infrastructure.database.session import get_db
-from backend.app.domain.users.models import User
-from backend.app.domain.organization.models import OrganizationMember, OrganizationRole
+from app.domain.identity.dependencies import get_current_active_user
+from app.infrastructure.database.session import get_db
+from app.domain.users.models import User
+from app.domain.organization.models import OrganizationMember, OrganizationRole
 
 class RequireOrgRole:
     """

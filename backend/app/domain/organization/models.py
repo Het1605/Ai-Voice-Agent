@@ -4,7 +4,7 @@ from sqlalchemy import String, Boolean, DateTime
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from backend.app.infrastructure.database.session import Base
+from app.infrastructure.database.session import Base
 
 class Organization(Base):
     """
@@ -40,7 +40,7 @@ from sqlalchemy import DateTime, ForeignKey, UniqueConstraint, Enum as SAEnum
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from backend.app.infrastructure.database.session import Base
+from app.infrastructure.database.session import Base
 
 
 class OrganizationRole(str, enum.Enum):

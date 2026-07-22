@@ -1,13 +1,13 @@
 import json
 import logging
 from sqlalchemy.ext.asyncio import AsyncSession
-from backend.app.infrastructure.cache.redis import redis_client
-from backend.app.infrastructure.database.session import SessionLocal
+from app.infrastructure.cache.redis import redis_client
+from app.infrastructure.database.session import SessionLocal
 
 from .session import CallSession
 from .context import RuntimeContext
 from .event_bus import EventBus
-from backend.app.runtime.events.models import EventType, RuntimeEvent
+from app.runtime.events.models import EventType, RuntimeEvent
 
 logger = logging.getLogger(__name__)
 

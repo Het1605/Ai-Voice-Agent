@@ -14,7 +14,7 @@ Architecture Fit:
 from typing import AsyncGenerator
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession
 from sqlalchemy.orm import DeclarativeBase
-from backend.app.core.config import settings
+from app.core.config import settings
 
 # Create the primary asynchronous SQLAlchemy database engine
 engine = create_async_engine(

@@ -1,6 +1,6 @@
 import asyncio
 import uuid
-from backend.app.runtime.core.manager import runtime_manager
+from app.runtime.core.manager import runtime_manager
 
 async def test_runtime_manager_concurrency():
     """

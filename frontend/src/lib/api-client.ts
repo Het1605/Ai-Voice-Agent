@@ -4,13 +4,14 @@ import { STORAGE_KEYS } from '@/config/constants';
 import { useActivityStore } from '@/store/activity-store';
 
 // The standard shape of our backend responses
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export interface ApiResponse<T = any> {
   success: boolean;
   data: T;
   error: null | {
     code: string;
     message: string;
-    details?: any;
+    details?: unknown;
   };
 }
 
@@ -60,6 +61,7 @@ apiClient.interceptors.response.use(
       useActivityStore.getState().end(requestToken);
       requestToken = null;
     }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return response.data as any;
   },
   (error: AxiosError<ApiResponse>) => {

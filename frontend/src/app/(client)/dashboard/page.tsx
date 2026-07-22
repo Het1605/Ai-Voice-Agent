@@ -1,3 +1,5 @@
+'use client';
+
 import { PageContainer, ContentContainer } from '@/components/layout';
 import { PageHeader } from '@/components/layout';
 import { Section, SectionHeader } from '@/components/layout';

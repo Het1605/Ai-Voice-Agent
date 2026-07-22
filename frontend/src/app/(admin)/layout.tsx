@@ -1,7 +1,7 @@
 'use client';
 
 import { AdminLayout } from '@/components/layout';
-import { RouteGuard } from '@/components/shell';
+import { RouteGuard, AppShellProvider } from '@/components/shell';
 import { PageContainer, ContentContainer, PageHeader } from '@/components/layout';
 
 export default function AdminRootLayout({
@@ -11,13 +11,15 @@ export default function AdminRootLayout({
 }) {
   return (
     <RouteGuard onDenied="redirect" redirectTo="/dashboard">
-      <AdminLayout hideSidebar>
-        <PageContainer>
-          <ContentContainer>
-            {children}
-          </ContentContainer>
-        </PageContainer>
-      </AdminLayout>
+      <AppShellProvider>
+        <AdminLayout hideSidebar>
+          <PageContainer>
+            <ContentContainer>
+              {children}
+            </ContentContainer>
+          </PageContainer>
+        </AdminLayout>
+      </AppShellProvider>
     </RouteGuard>
   );
 }

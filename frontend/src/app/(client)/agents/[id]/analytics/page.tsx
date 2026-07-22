@@ -1,3 +1,5 @@
+'use client';
+
 import { Section, SectionHeader } from '@/components/layout';
 import { Grid } from '@/components/layout';
 import { Panel } from '@/components/ui/panel';

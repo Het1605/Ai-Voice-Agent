@@ -3,9 +3,9 @@ import logging
 import httpx
 from typing import AsyncGenerator
 
-from backend.app.runtime.ports import ILLMGenerator
-from backend.app.runtime.core.context import RuntimeContext
-from backend.app.core.config import settings
+from app.runtime.ports import ILLMGenerator
+from app.runtime.core.context import RuntimeContext
+from app.core.config import settings
 
 logger = logging.getLogger(__name__)
 

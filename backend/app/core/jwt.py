@@ -13,8 +13,8 @@ from typing import Any, Dict, Optional
 import jwt
 from jwt.exceptions import InvalidTokenError, ExpiredSignatureError
 
-from backend.app.core.config import settings
-from backend.app.core.exceptions import UnauthorizedException
+from app.core.config import settings
+from app.core.exceptions import UnauthorizedException
 
 
 def create_access_token(subject: str | Any, expires_delta: Optional[timedelta] = None) -> str:

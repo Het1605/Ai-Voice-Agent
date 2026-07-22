@@ -21,7 +21,6 @@ import { useRouter } from 'next/navigation';
 import { useAuthStore } from '@/store/auth-store';
 import { useCurrentUser, useLogin, useLogout, useRegister } from '@/hooks/use-auth';
 import type { LoginRequest, RegisterRequest } from '@/types/domain';
-import { ROUTES } from '@/config/constants';
 
 // ─── Context Shape ───────────────────────────────────────────────────────
 
@@ -87,7 +86,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const login = useCallback(
     async (data: LoginRequest) => {
       await loginMutation.mutateAsync(data);
-      router.push(ROUTES.client.dashboard);
+      router.push('/dashboard');
     },
     [loginMutation, router]
   );
@@ -95,14 +94,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const register = useCallback(
     async (data: RegisterRequest) => {
       await registerMutation.mutateAsync(data);
-      router.push(ROUTES.auth.login);
+      router.push('/login');
     },
     [registerMutation, router]
   );
 
   const logout = useCallback(async () => {
     await logoutMutation.mutateAsync();
-    router.push(ROUTES.auth.login);
+    router.push('/login');
   }, [logoutMutation, router]);
 
   // ─── Value ────────────────────────────────────────────────────────────

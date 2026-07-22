@@ -1,9 +1,9 @@
 from fastapi import APIRouter, WebSocket, WebSocketDisconnect
 import logging
-from backend.app.api.websockets.session import WebSocketSessionHandler
-from backend.app.api.websockets.transcoder import AudioTranscoder
-from backend.app.api.websockets.bridge import WebSocketRuntimeBridge
-from backend.app.runtime.core.manager import runtime_manager
+from app.api.websockets.session import WebSocketSessionHandler
+from app.api.websockets.transcoder import AudioTranscoder
+from app.api.websockets.bridge import WebSocketRuntimeBridge
+from app.runtime.core.manager import runtime_manager
 
 logger = logging.getLogger(__name__)
 

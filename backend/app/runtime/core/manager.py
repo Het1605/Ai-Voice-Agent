@@ -4,7 +4,7 @@ import logging
 from typing import Dict, Optional
 
 from .call_runtime import CallRuntime
-from backend.app.runtime.events.models import EventType
+from app.runtime.events.models import EventType
 
 logger = logging.getLogger(__name__)
 
@@ -34,11 +34,11 @@ class RuntimeManager:
     async def create_runtime(self, agent_id: Optional[uuid.UUID] = None, call_id: Optional[str] = None) -> CallRuntime:
         """Instantiates and registers a new CallRuntime safely. Acts as the DI Factory."""
         # 1. Instantiate Core Adapters
-        from backend.app.infrastructure.ai.silero import SileroVadAdapter
-        from backend.app.infrastructure.ai.faster_whisper import FasterWhisperAdapter
-        from backend.app.infrastructure.ai.kokoro import KokoroAdapter
-        from backend.app.infrastructure.ai.ollama import OllamaAdapter
-        from backend.app.infrastructure.workflows.mock import MockWorkflowAdapter
+        from app.infrastructure.ai.silero import SileroVadAdapter
+        from app.infrastructure.ai.faster_whisper import FasterWhisperAdapter
+        from app.infrastructure.ai.kokoro import KokoroAdapter
+        from app.infrastructure.ai.ollama import OllamaAdapter
+        from app.infrastructure.workflows.mock import MockWorkflowAdapter
         
         vad = SileroVadAdapter()
         stt = FasterWhisperAdapter()
@@ -51,7 +51,7 @@ class RuntimeManager:
         runtime = CallRuntime(agent_id=agent_id, call_id=call_id)
         session_id = runtime.get_session_id()
         
-        from backend.app.runtime.orchestrators.hybrid import HybridOrchestrator
+        from app.runtime.orchestrators.hybrid import HybridOrchestrator
         orchestrator = HybridOrchestrator(
             llm=llm,
             tts=tts,
@@ -62,7 +62,7 @@ class RuntimeManager:
         runtime.conversation_engine.orchestrator = orchestrator
         
         # 3. Instantiate AudioPipeline
-        from backend.app.runtime.core.audio_pipeline import AudioPipeline
+        from app.runtime.core.audio_pipeline import AudioPipeline
         audio_pipeline = AudioPipeline(
             session_id=str(session_id),
             event_bus=runtime.event_bus,

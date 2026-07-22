@@ -3,7 +3,7 @@ from enum import Enum
 from datetime import datetime, UTC
 from typing import Any, Dict, Optional
 from pydantic import BaseModel, Field
-from backend.app.runtime.core.audio import AudioFrame
+from app.runtime.core.audio import AudioFrame
 
 class EventType(str, Enum):
     # Lifecycle

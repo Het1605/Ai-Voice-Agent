@@ -17,7 +17,7 @@ from sqlalchemy import String, Boolean, DateTime, Integer
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.dialects.postgresql import UUID
 
-from backend.app.infrastructure.database.session import Base
+from app.infrastructure.database.session import Base
 
 
 class SystemRole(str, enum.Enum):

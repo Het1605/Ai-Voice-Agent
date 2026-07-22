@@ -4,7 +4,7 @@ from typing import Optional
 
 from .context import RuntimeContext
 from .event_bus import EventBus
-from backend.app.runtime.events.models import EventType, RuntimeEvent
+from app.runtime.events.models import EventType, RuntimeEvent
 
 logger = logging.getLogger(__name__)
 

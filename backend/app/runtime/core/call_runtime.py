@@ -5,8 +5,8 @@ from typing import Optional
 from .session import CallSession
 from .context import RuntimeContext
 from .event_bus import EventBus
-from backend.app.runtime.events.models import RuntimeEvent, EventType
-from backend.app.runtime.core.audio import AudioFrame
+from app.runtime.events.models import RuntimeEvent, EventType
+from app.runtime.core.audio import AudioFrame
 import asyncio
 from .session_sync import SessionSynchronizer
 from .engine import ConversationEngine

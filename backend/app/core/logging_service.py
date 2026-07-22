@@ -11,7 +11,7 @@ Architecture Fit:
 
 import logging
 import sys
-from backend.app.core.config import settings
+from app.core.config import settings
 
 def setup_logging() -> None:
     """

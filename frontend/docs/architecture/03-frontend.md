@@ -44,10 +44,8 @@ src/app/
 │   └── ... (future modules)
 └── (admin)/
     ├── layout.tsx          ← RouteGuard + AdminLayout (header-only)
-    ├── dashboard/page.tsx
     ├── organizations/page.tsx
-    ├── users/page.tsx
-    └── audit-logs/page.tsx
+    └── users/page.tsx
 ```
 
 ### Root Layout (`app/layout.tsx`)
@@ -210,9 +208,7 @@ All components use `cn()` utility for class merging and accept standard HTML att
 | `PageActions` | Action buttons row (secondary) |
 | `Section` / `SectionHeader` / `SectionContent` | Card-like grouped content block |
 | `Grid` / `GridItem` | Responsive CSS Grid with breakpoint controls |
-| `Stack` / `VStack` / `HStack` | Flexbox layout with consistent gap |
 | `SplitLayout` | Two-panel split view |
-| `EmptyLayout` | Full-viewport empty state shell |
 | `AuthLayout` | Centered auth card with ambient glow |
 | `AdminLayout` | Header-only AppShell variant |
 

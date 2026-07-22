@@ -12,9 +12,9 @@ from typing import AsyncGenerator
 from sqlalchemy.ext.asyncio import AsyncSession
 from redis.asyncio import Redis
 
-from backend.app.core.config import Settings, settings
-from backend.app.infrastructure.database.session import get_db
-from backend.app.infrastructure.cache.redis import get_redis
+from app.core.config import Settings, settings
+from app.infrastructure.database.session import get_db
+from app.infrastructure.cache.redis import get_redis
 
 async def get_db_session() -> AsyncGenerator[AsyncSession, None]:
     """

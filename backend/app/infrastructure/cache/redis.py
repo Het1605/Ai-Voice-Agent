@@ -11,7 +11,7 @@ Architecture Fit:
 
 from typing import AsyncGenerator
 import redis.asyncio as redis
-from backend.app.core.config import settings
+from app.core.config import settings
 
 # Initialize the global asynchronous Redis connection client
 redis_client = redis.from_url(

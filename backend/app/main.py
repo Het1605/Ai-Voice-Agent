@@ -14,10 +14,10 @@ import logging
 from fastapi import FastAPI, HTTPException, Request, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
-from backend.app.core.config import settings
-from backend.app.core.logging_service import setup_logging
-from backend.app.core.exceptions import BaseAppException
-from backend.app.core.response import error_response
+from app.core.config import settings
+from app.core.logging_service import setup_logging
+from app.core.exceptions import BaseAppException
+from app.core.response import error_response
 
 # Initialize logging system immediately on launch
 setup_logging()
@@ -31,7 +31,7 @@ async def lifespan(app: FastAPI):
     
     try:
         from sqlalchemy import text
-        from backend.app.infrastructure.database.session import engine
+        from app.infrastructure.database.session import engine
         async with engine.connect() as conn:
             await conn.execute(text("SELECT 1"))
         logger.info("Database connection handshake successful.")
@@ -39,7 +39,7 @@ async def lifespan(app: FastAPI):
         logger.error(f"Database connection handshake failed: {e}")
         
     try:
-        from backend.app.infrastructure.cache.redis import ping_redis
+        from app.infrastructure.cache.redis import ping_redis
         if await ping_redis():
             logger.info("Redis connection handshake successful.")
         else:
@@ -53,14 +53,14 @@ async def lifespan(app: FastAPI):
     logger.info("Cleaning up database and Redis connection pools...")
     
     try:
-        from backend.app.infrastructure.database.session import engine
+        from app.infrastructure.database.session import engine
         await engine.dispose()
         logger.info("Database connection engine pools disposed.")
     except Exception as e:
         logger.error(f"Failed to dispose database connection engine: {e}")
         
     try:
-        from backend.app.infrastructure.cache.redis import redis_client
+        from app.infrastructure.cache.redis import redis_client
         await redis_client.close()
         logger.info("Redis client connections closed.")
     except Exception as e:
@@ -81,10 +81,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-from backend.app.api.v1.router import api_router
+from app.api.v1.router import api_router
 app.include_router(api_router, prefix=settings.API_V1_STR)
 
-from backend.app.api.websockets.router import router as websocket_router
+from app.api.websockets.router import router as websocket_router
 app.include_router(websocket_router)
 
 @app.exception_handler(BaseAppException)
@@ -149,7 +149,7 @@ async def health_check() -> JSONResponse:
     # Assert database connectivity
     try:
         from sqlalchemy import text
-        from backend.app.infrastructure.database.session import engine
+        from app.infrastructure.database.session import engine
         async with engine.connect() as conn:
             await conn.execute(text("SELECT 1"))
         db_healthy = True
@@ -158,7 +158,7 @@ async def health_check() -> JSONResponse:
         
     # Assert Redis connectivity
     try:
-        from backend.app.infrastructure.cache.redis import ping_redis
+        from app.infrastructure.cache.redis import ping_redis
         if await ping_redis():
             redis_healthy = True
     except Exception as e:

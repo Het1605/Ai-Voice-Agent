@@ -2,16 +2,16 @@ import asyncio
 from typing import AsyncGenerator
 import logging
 
-from backend.app.runtime.ports import (
+from app.runtime.ports import (
     IVoiceActivityDetector, VadState,
     IAudioTranscriber,
     ILLMGenerator,
     IAudioSynthesizer,
     IOrchestrator
 )
-from backend.app.runtime.core.context import RuntimeContext
-from backend.app.runtime.core.event_bus import EventBus
-from backend.app.runtime.events.models import EventType, RuntimeEvent
+from app.runtime.core.context import RuntimeContext
+from app.runtime.core.event_bus import EventBus
+from app.runtime.events.models import EventType, RuntimeEvent
 
 logger = logging.getLogger(__name__)
 

@@ -3,7 +3,7 @@ import logging
 from typing import Callable, Dict, List
 from collections import defaultdict
 
-from backend.app.runtime.events.models import EventType, RuntimeEvent
+from app.runtime.events.models import EventType, RuntimeEvent
 
 logger = logging.getLogger(__name__)
 

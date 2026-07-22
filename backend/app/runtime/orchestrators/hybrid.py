@@ -3,13 +3,13 @@ import asyncio
 from enum import Enum
 import uuid
 
-from backend.app.runtime.ports import IOrchestrator
-from backend.app.runtime.ports import ILLMGenerator
-from backend.app.runtime.ports import IAudioSynthesizer
-from backend.app.runtime.core.context import RuntimeContext
-from backend.app.runtime.core.event_bus import EventBus
-from backend.app.runtime.events.models import EventType, RuntimeEvent
-from backend.app.runtime.utils.chunker import SentenceChunker
+from app.runtime.ports import IOrchestrator
+from app.runtime.ports import ILLMGenerator
+from app.runtime.ports import IAudioSynthesizer
+from app.runtime.core.context import RuntimeContext
+from app.runtime.core.event_bus import EventBus
+from app.runtime.events.models import EventType, RuntimeEvent
+from app.runtime.utils.chunker import SentenceChunker
 
 logger = logging.getLogger(__name__)
 

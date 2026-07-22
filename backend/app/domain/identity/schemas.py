@@ -6,7 +6,7 @@ Responsibilities:
 """
 
 from pydantic import BaseModel, EmailStr
-from backend.app.domain.users.schemas import UserResponse
+from app.domain.users.schemas import UserResponse
 
 class LoginRequest(BaseModel):
     email: EmailStr

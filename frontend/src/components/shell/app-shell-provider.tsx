@@ -6,6 +6,8 @@ import {
   useState,
   useMemo,
   useCallback,
+  useRef,
+  useEffect,
   type ReactNode,
 } from 'react';
 import { usePathname } from 'next/navigation';
@@ -14,7 +16,6 @@ import { useShellStore } from '@/store/shell-store';
 import type { NavigationGroup, RouteDefinition } from '@/navigation';
 import type { ExtensionPosition } from './extension-registry';
 import { ShellExtensionRegistry } from './extension-registry';
-import { useRef } from 'react';
 
 // ═════════════════════════════════════════════════════════════════════════════
 // Context
@@ -103,12 +104,14 @@ export function AppShellProvider({
 
   // Track route transitions
   const prevPathname = useRef(pathname);
-  if (prevPathname.current !== pathname) {
-    setIsNavigating(true);
-    prevPathname.current = pathname;
-    // Reset after a short delay (actual loading is covered by activity-store)
-    setTimeout(() => setIsNavigating(false), 300);
-  }
+  useEffect(() => {
+    if (prevPathname.current !== pathname) {
+      setIsNavigating(true);
+      prevPathname.current = pathname;
+      // Reset after a short delay (actual loading is covered by activity-store)
+      setTimeout(() => setIsNavigating(false), 300);
+    }
+  }, [pathname]);
 
   const getExtensionsAt = useCallback(
     (position: ExtensionPosition): ReactNode[] => {

@@ -1,3 +1,5 @@
+'use client';
+
 import { Section, SectionHeader } from '@/components/layout';
 import { EmptyState } from '@/components/ui/empty-state';
 import { Mic2 } from 'lucide-react';

@@ -3,10 +3,10 @@ import asyncio
 from typing import Optional
 from enum import Enum
 
-from backend.app.runtime.core.event_bus import EventBus
-from backend.app.runtime.events.models import EventType, RuntimeEvent
-from backend.app.runtime.core.audio import AudioFrame
-from backend.app.runtime.ports import IVoiceActivityDetector, IAudioTranscriber, VadState
+from app.runtime.core.event_bus import EventBus
+from app.runtime.events.models import EventType, RuntimeEvent
+from app.runtime.core.audio import AudioFrame
+from app.runtime.ports import IVoiceActivityDetector, IAudioTranscriber, VadState
 
 logger = logging.getLogger(__name__)
 

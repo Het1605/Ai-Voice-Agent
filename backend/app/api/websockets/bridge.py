@@ -3,11 +3,11 @@ import logging
 import base64
 from typing import Optional
 
-from backend.app.api.websockets.session import WebSocketSessionHandler
-from backend.app.api.websockets.transcoder import AudioTranscoder
-from backend.app.api.websockets.schemas import AudioPacket, ControlPacket, PacketType
-from backend.app.runtime.core.call_runtime import CallRuntime
-from backend.app.runtime.core.audio import AudioFrame
+from app.api.websockets.session import WebSocketSessionHandler
+from app.api.websockets.transcoder import AudioTranscoder
+from app.api.websockets.schemas import AudioPacket, ControlPacket, PacketType
+from app.runtime.core.call_runtime import CallRuntime
+from app.runtime.core.audio import AudioFrame
 
 logger = logging.getLogger(__name__)
 

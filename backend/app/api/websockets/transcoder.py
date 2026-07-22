@@ -3,7 +3,7 @@ import io
 from typing import Optional
 import av
 
-from backend.app.runtime.core.audio import AudioFrame
+from app.runtime.core.audio import AudioFrame
 
 logger = logging.getLogger(__name__)
 

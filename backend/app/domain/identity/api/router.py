@@ -10,11 +10,11 @@ Architecture Fit:
 from fastapi import APIRouter, Depends, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from backend.app.api.dependencies import get_db_session
-from backend.app.domain.identity.dependencies import oauth2_scheme
-from backend.app.domain.users.schemas import UserCreate, UserResponse
-from backend.app.domain.identity.schemas import LoginRequest, LoginResponse, RefreshTokenRequest, TokenResponse, MessageResponse
-from backend.app.domain.identity.services.service import AuthService
+from app.api.dependencies import get_db_session
+from app.domain.identity.dependencies import oauth2_scheme
+from app.domain.users.schemas import UserCreate, UserResponse
+from app.domain.identity.schemas import LoginRequest, LoginResponse, RefreshTokenRequest, TokenResponse, MessageResponse
+from app.domain.identity.services.service import AuthService
 
 router = APIRouter()
 

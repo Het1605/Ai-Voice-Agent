@@ -1,7 +1,7 @@
 'use client';
 
 import { AppShell } from './app-shell';
-import { Header } from './header';
+import { ShellHeader } from '@/components/shell';
 import type { AppShellProps } from './app-shell';
 
 /**
@@ -15,7 +15,7 @@ import type { AppShellProps } from './app-shell';
  */
 export function AdminLayout({
   children,
-  header = <Header />,
+  header = <ShellHeader />,
   ...rest
 }: Omit<AppShellProps, 'sidebar'> & {
   /** Override the default header */

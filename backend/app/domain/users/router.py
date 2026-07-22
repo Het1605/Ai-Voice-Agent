@@ -8,9 +8,9 @@ Architecture Fit:
 """
 
 from fastapi import APIRouter, Depends
-from backend.app.domain.users.models import User, SystemRole
-from backend.app.domain.users.schemas import UserResponse
-from backend.app.domain.identity.dependencies import get_current_active_user, RequireRole
+from app.domain.users.models import User, SystemRole
+from app.domain.users.schemas import UserResponse
+from app.domain.identity.dependencies import get_current_active_user, RequireRole
 
 router = APIRouter()
 

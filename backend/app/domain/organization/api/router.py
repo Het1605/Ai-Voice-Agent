@@ -4,15 +4,15 @@ import uuid
 from fastapi import APIRouter, Depends, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from backend.app.infrastructure.database.session import get_db
-from backend.app.domain.organization.schemas import OrganizationCreate, OrganizationUpdate, OrganizationResponse
-from backend.app.domain.organization.schemas import OrganizationMemberResponse, OrganizationMemberWithOrgResponse
-from backend.app.domain.organization.services.service import OrganizationService
-from backend.app.domain.organization.services.service import OrganizationMemberService
-from backend.app.domain.users.models import User, SystemRole
-from backend.app.domain.organization.models import OrganizationRole
-from backend.app.domain.identity.dependencies import RequireRole, get_current_active_user
-from backend.app.domain.organization.dependencies import RequireOrgRole
+from app.infrastructure.database.session import get_db
+from app.domain.organization.schemas import OrganizationCreate, OrganizationUpdate, OrganizationResponse
+from app.domain.organization.schemas import OrganizationMemberResponse, OrganizationMemberWithOrgResponse
+from app.domain.organization.services.service import OrganizationService
+from app.domain.organization.services.service import OrganizationMemberService
+from app.domain.users.models import User, SystemRole
+from app.domain.organization.models import OrganizationRole
+from app.domain.identity.dependencies import RequireRole, get_current_active_user
+from app.domain.organization.dependencies import RequireOrgRole
 
 router = APIRouter()
 

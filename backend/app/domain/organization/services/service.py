@@ -15,9 +15,9 @@ import uuid
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 
-from backend.app.domain.organization.models import Organization
-from backend.app.domain.organization.schemas import OrganizationCreate, OrganizationUpdate
-from backend.app.core.exceptions import NotFoundException, ConflictException
+from app.domain.organization.models import Organization
+from app.domain.organization.schemas import OrganizationCreate, OrganizationUpdate
+from app.core.exceptions import NotFoundException, ConflictException
 
 class OrganizationService:
     
@@ -126,12 +126,12 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from sqlalchemy.orm import selectinload
 
-from backend.app.domain.organization.models import OrganizationMember, OrganizationRole
-from backend.app.domain.users.models import User
-from backend.app.domain.organization.models import Organization
-from backend.app.core.exceptions import NotFoundException, ConflictException, UnauthorizedException
-from backend.app.domain.identity.services.service import AuthService
-from backend.app.domain.organization.services.service import OrganizationService
+from app.domain.organization.models import OrganizationMember, OrganizationRole
+from app.domain.users.models import User
+from app.domain.organization.models import Organization
+from app.core.exceptions import NotFoundException, ConflictException, UnauthorizedException
+from app.domain.identity.services.service import AuthService
+from app.domain.organization.services.service import OrganizationService
 
 class OrganizationMemberService:
 

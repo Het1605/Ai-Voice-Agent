@@ -3,10 +3,10 @@ Purpose: Main API router connecting all version 1 endpoints.
 """
 
 from fastapi import APIRouter
-from backend.app.domain.identity.api.router import router as auth_router
-from backend.app.domain.users.router import router as users_router
-from backend.app.domain.organization.api.router import router as organizations_router
-from backend.app.domain.agents.router import router as agents_router
+from app.domain.identity.api.router import router as auth_router
+from app.domain.users.router import router as users_router
+from app.domain.organization.api.router import router as organizations_router
+from app.domain.agents.router import router as agents_router
 
 api_router = APIRouter()
 
