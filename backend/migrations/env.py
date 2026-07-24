@@ -9,11 +9,11 @@ from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 
 from alembic import context
-from backend.app.core.config import settings
-from backend.app.infrastructure.database.session import Base
-import backend.app.domain.users.models
-import backend.app.domain.organization.models
-import backend.app.domain.agents.models  # Ensures models are registered with Base.metadata
+from app.core.config import settings
+from app.infrastructure.database.session import Base
+import app.domain.users.models
+import app.domain.organization.models
+import app.domain.agents.models  # Ensures models are registered with Base.metadata
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

@@ -11,10 +11,11 @@ from fastapi import APIRouter, Depends
 from app.domain.users.models import User, SystemRole
 from app.domain.users.schemas import UserResponse
 from app.domain.identity.dependencies import get_current_active_user, RequireRole
+from app.core.response import APIResponse, success_response
 
 router = APIRouter()
 
-@router.get("/me", response_model=UserResponse)
+@router.get("/me", response_model=APIResponse[UserResponse])
 async def read_users_me(
     current_user: User = Depends(get_current_active_user)
 ):
@@ -22,10 +23,10 @@ async def read_users_me(
     Get the currently logged-in user's profile.
     Available to any authenticated user (USER, ADMIN, SUPER_ADMIN).
     """
-    return current_user
+    return success_response(current_user)
 
 
-@router.get("/admin-only", response_model=UserResponse)
+@router.get("/admin-only", response_model=APIResponse[UserResponse])
 async def read_admin_data(
     current_user: User = Depends(RequireRole([SystemRole.ADMIN]))
 ):
@@ -34,4 +35,4 @@ async def read_admin_data(
     Available ONLY to ADMIN and SUPER_ADMIN roles.
     """
     # The RequireRole dependency handles the authorization check before this code runs.
-    return current_user
+    return success_response(current_user)

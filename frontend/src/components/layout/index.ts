@@ -3,8 +3,6 @@ export type { AppShellProps } from './app-shell';
 
 export { AdminLayout } from './admin-layout';
 
-export { AuthLayout } from './auth-layout';
-export type { AuthLayoutProps } from './auth-layout';
 
 export { PageContainer } from './page-container';
 export type { PageContainerProps } from './page-container';

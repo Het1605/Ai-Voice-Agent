@@ -12,7 +12,7 @@ Architecture Fit:
 """
 
 from typing import Dict, Any
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 import uuid
 
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -23,6 +23,7 @@ from app.domain.users.schemas import UserCreate
 from app.core.security import get_password_hash, verify_password
 from app.core.jwt import create_access_token, create_refresh_token, verify_token
 from app.core.exceptions import UnauthorizedException, BadRequestException, NotFoundException
+from app.core.config import settings
 
 
 class AuthService:
@@ -47,12 +48,15 @@ class AuthService:
         """
         if not user.is_active:
             raise UnauthorizedException(detail="Inactive user account")
-            
+
         if user.account_locked_until:
             if user.account_locked_until > datetime.now(timezone.utc):
-                raise UnauthorizedException(detail="Account is temporarily locked")
-            # If the lock time has passed, we could optionally reset it here.
-            # But we'll leave that for the login flow to handle.
+                remaining = (user.account_locked_until - datetime.now(timezone.utc)).seconds // 60
+                raise UnauthorizedException(
+                    detail=f"Account is temporarily locked. Try again in {max(1, remaining)} minute(s)."
+                )
+            # Lock time has passed — clear it
+            user.account_locked_until = None
 
     @classmethod
     async def register_user(cls, db: AsyncSession, user_in: UserCreate) -> User:
@@ -94,7 +98,13 @@ class AuthService:
         
         if not verify_password(password, user.hashed_password):
             user.failed_login_attempts += 1
-            # Simple lockout policy could be added here (e.g., if > 5 lock account)
+
+            # Lock account if threshold exceeded
+            if user.failed_login_attempts >= settings.ACCOUNT_LOCKOUT_THRESHOLD:
+                user.account_locked_until = datetime.now(timezone.utc) + timedelta(
+                    minutes=settings.ACCOUNT_LOCKOUT_MINUTES
+                )
+
             await db.commit()
             raise UnauthorizedException(detail="Incorrect email or password")
             

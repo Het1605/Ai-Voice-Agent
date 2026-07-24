@@ -26,6 +26,10 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
     REFRESH_TOKEN_EXPIRE_MINUTES: int = 10080  # 7 days
 
+    # Account Lockout Settings
+    ACCOUNT_LOCKOUT_THRESHOLD: int = 5
+    ACCOUNT_LOCKOUT_MINUTES: int = 15
+
     # CORS Settings
     CORS_ORIGINS: List[str] = ["http://localhost:3000", "http://127.0.0.1:3000"]
 

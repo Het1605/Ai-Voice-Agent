@@ -30,13 +30,13 @@ export function AuthLayout({
   title,
   description,
   showGlow = true,
-  maxWidth = 'max-w-md',
+  maxWidth = 'max-w-lg',
   className,
 }: AuthLayoutProps) {
   return (
     <div
       className={cn(
-        'relative flex min-h-screen items-center justify-center overflow-hidden bg-background',
+        'relative flex min-h-screen items-center justify-center overflow-hidden bg-background px-4 py-12',
         className,
       )}
     >
@@ -49,7 +49,12 @@ export function AuthLayout({
       )}
 
       {/* Content card */}
-      <div className={cn('relative z-10 w-full px-4 animate-in-fade', maxWidth)}>
+      <div
+        className={cn(
+          'relative z-10 w-full rounded-xl border border-border bg-card p-8 shadow-sm animate-in-fade',
+          maxWidth,
+        )}
+      >
         {title && (
           <div className="mb-8 text-center">
             <h1 className="text-2xl font-bold tracking-tight text-foreground">

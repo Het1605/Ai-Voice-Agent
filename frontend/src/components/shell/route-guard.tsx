@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useMemo, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { usePathname } from 'next/navigation';
 import { useAuthStore } from '@/store/auth-store';
@@ -54,6 +54,7 @@ export function RouteGuard({
   const pathname = usePathname();
   const router = useRouter();
   const user = useAuthStore((s) => s.user);
+  const accessToken = useAuthStore((s) => s.accessToken);
 
   const check = useMemo(() => {
     const href = routeHref ?? pathname;
@@ -82,10 +83,13 @@ export function RouteGuard({
   // Handle denial
   if (!check.allowed) {
     switch (onDenied) {
-      case 'redirect':
+      case 'redirect': {
+        // Unauthenticated users always go to login
+        const target = !accessToken ? '/login' : redirectTo;
         // Use setTimeout to avoid React state updates during render
-        setTimeout(() => router.push(redirectTo), 0);
+        setTimeout(() => router.push(target), 0);
         return null;
+      }
       case 'hide':
         return null;
       case 'fallback':

@@ -22,7 +22,7 @@ export const authKeys = {
 
 /** Fetch the current user profile. Used on app load and after login. */
 export function useCurrentUser() {
-  const { accessToken, setUser, setRestoring } = useAuthStore();
+  const { accessToken, setUser } = useAuthStore();
 
   return useQuery({
     queryKey: authKeys.me(),
@@ -33,8 +33,9 @@ export function useCurrentUser() {
     },
     enabled: !!accessToken,
     retry: 1,
-    staleTime: 1000 * 60 * 5, // 5 minutes
-    gcTime: 1000 * 60 * 30,   // 30 minutes
+    staleTime: 1000 * 60 * 5,    // 5 minutes — data is fresh
+    gcTime: 1000 * 60 * 30,      // 30 minutes — cache persists
+    refetchInterval: 1000 * 60 * 25, // proactively re-verify before token expiry (30 min)
     meta: { persist: true },
   });
 }

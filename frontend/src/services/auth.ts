@@ -13,22 +13,20 @@ import type {
   User,
   RefreshTokenRequest,
 } from '@/types/domain';
-import type { ApiResponse } from '@/lib/api-client';
-
 export const authService = {
   async login(data: LoginRequest): Promise<LoginResponse> {
-    const res = await apiClient.post('/auth/login', data) as ApiResponse<LoginResponse>;
-    return res.data;
+    const response = await apiClient.post('/auth/login', data) as LoginResponse;
+    return response;
   },
 
   async register(data: RegisterRequest): Promise<User> {
-    const res = await apiClient.post('/auth/register', data) as ApiResponse<User>;
-    return res.data;
+    const response = await apiClient.post('/auth/register', data) as User;
+    return response;
   },
 
   async refreshToken(data: RefreshTokenRequest): Promise<TokenPair> {
-    const res = await apiClient.post('/auth/refresh', data) as ApiResponse<TokenPair>;
-    return res.data;
+    const response = await apiClient.post('/auth/refresh', data) as TokenPair;
+    return response;
   },
 
   async logout(): Promise<void> {
@@ -36,7 +34,7 @@ export const authService = {
   },
 
   async getCurrentUser(): Promise<User> {
-    const res = await apiClient.get('/users/me') as ApiResponse<User>;
-    return res.data;
+    const response = await apiClient.get('/users/me') as User;
+    return response;
   },
 };

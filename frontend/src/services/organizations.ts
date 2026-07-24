@@ -11,46 +11,44 @@ import type {
   OrganizationMember,
   OrganizationMemberWithOrg,
 } from '@/types/domain';
-import type { ApiResponse } from '@/lib/api-client';
-
 export const organizationService = {
   async create(data: OrganizationCreate): Promise<Organization> {
-    const res = await apiClient.post('/organizations', data) as ApiResponse<Organization>;
-    return res.data;
+    const response = await apiClient.post('/organizations', data) as Organization;
+    return response;
   },
 
   async list(): Promise<Organization[]> {
-    const res = await apiClient.get('/organizations') as ApiResponse<Organization[]>;
-    return res.data;
+    const response = await apiClient.get('/organizations') as Organization[];
+    return response;
   },
 
   async getMyOrganizations(): Promise<OrganizationMemberWithOrg[]> {
-    const res = await apiClient.get('/organizations/me') as ApiResponse<OrganizationMemberWithOrg[]>;
-    return res.data;
+    const response = await apiClient.get('/organizations/me') as OrganizationMemberWithOrg[];
+    return response;
   },
 
   async getById(orgId: string): Promise<Organization> {
-    const res = await apiClient.get(`/organizations/${orgId}`) as ApiResponse<Organization>;
-    return res.data;
+    const response = await apiClient.get(`/organizations/${orgId}`) as Organization;
+    return response;
   },
 
   async update(orgId: string, data: OrganizationUpdate): Promise<Organization> {
-    const res = await apiClient.patch(`/organizations/${orgId}`, data) as ApiResponse<Organization>;
-    return res.data;
+    const response = await apiClient.patch(`/organizations/${orgId}`, data) as Organization;
+    return response;
   },
 
   async getMembers(orgId: string): Promise<OrganizationMember[]> {
-    const res = await apiClient.get(`/organizations/${orgId}/members`) as ApiResponse<OrganizationMember[]>;
-    return res.data;
+    const response = await apiClient.get(`/organizations/${orgId}/members`) as OrganizationMember[];
+    return response;
   },
 
   async activate(orgId: string): Promise<Organization> {
-    const res = await apiClient.post(`/organizations/${orgId}/activate`) as ApiResponse<Organization>;
-    return res.data;
+    const response = await apiClient.post(`/organizations/${orgId}/activate`) as Organization;
+    return response;
   },
 
   async deactivate(orgId: string): Promise<Organization> {
-    const res = await apiClient.post(`/organizations/${orgId}/deactivate`) as ApiResponse<Organization>;
-    return res.data;
+    const response = await apiClient.post(`/organizations/${orgId}/deactivate`) as Organization;
+    return response;
   },
 };

@@ -59,6 +59,8 @@ export function useNavigation(): UseNavigationReturn {
 
   const visibleRoutes = useMemo(() => {
     return routes.filter((route) => {
+      // Hidden routes are excluded from sidebar navigation
+      if (route.hidden) return false;
       // Permission check
       if (!hasPermission(userRole, route.permission)) return false;
       // Feature flag check

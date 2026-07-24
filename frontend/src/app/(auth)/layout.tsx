@@ -1,9 +1,7 @@
-import { AuthLayout as AuthLayoutComponent } from '@/components/layout';
-
+/**
+ * Auth layout — minimal wrapper for auth pages.
+ * Pages use AuthCard directly for their visual layout.
+ */
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <AuthLayoutComponent>
-      {children}
-    </AuthLayoutComponent>
-  );
+  return <>{children}</>;
 }

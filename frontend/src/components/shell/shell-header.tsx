@@ -15,6 +15,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { useAuth } from '@/contexts/auth-context';
 
 // ─── Theme Toggle ─────────────────────────────────────────────────────────────
 
@@ -64,6 +65,7 @@ export interface ShellHeaderProps {
  */
 export function ShellHeader({ className }: ShellHeaderProps) {
   const { getExtensionsAt, currentRoute } = useAppShell();
+  const { logout } = useAuth();
 
   const leftExtensions = getExtensionsAt('header-left');
   const rightExtensions = getExtensionsAt('header-right');
@@ -127,7 +129,7 @@ export function ShellHeader({ className }: ShellHeaderProps) {
           <DropdownMenuContent align="end" className="w-48">
             <DropdownMenuItem>Profile</DropdownMenuItem>
             <DropdownMenuItem>Settings</DropdownMenuItem>
-            <DropdownMenuItem>Sign Out</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => logout()}>Sign Out</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
